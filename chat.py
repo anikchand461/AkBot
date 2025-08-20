@@ -21,7 +21,7 @@ retrievers = [db.as_retriever() for db in dbs]
 merged_retriever = EnsembleRetriever(retrievers=retrievers, weights=[0.25]*4)
 
 # ===== Gemini Flash =====
-llm = init_chat_model("gemini-1.5-flash", model_provider="google_genai", temperature=0.8)
+llm = init_chat_model("gemini-2.5-flash", model_provider="google_genai", temperature=0.8)
 
 system_prompt = """
 You are AkBot 🤖, a friendly AI assistant built by Anik Chand.
