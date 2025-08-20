@@ -27,7 +27,7 @@ merged_retriever = EnsembleRetriever(
 
 # ===== Step 2. Gemini Flash model =====
 llm = init_chat_model(
-    "gemini-2.5-flash",
+    "gemini-1.5-flash",
     model_provider="google_genai",
     temperature=0.8
 )

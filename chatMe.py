@@ -31,7 +31,7 @@ merged_retriever = EnsembleRetriever(
 )
 
 # 5. Gemini Flash model
-llm = init_chat_model("gemini-2.5-flash", model_provider="google_genai")
+llm = init_chat_model("gemini-1.5-flash", model_provider="google_genai")
 
 # 6. Retrieval-Augmented QA chain
 qa_chain = RetrievalQA.from_chain_type(
