@@ -198,10 +198,20 @@
       border-radius: 4px;
     }
 
-    /* Bot message specific styling */
-    .bot strong, .bot b {
-      color: #2c3e50;
-    }
+@media (prefers-color-scheme: dark) {
+  .bot {
+    background: #333333;
+    color: #ffffff; /* make all normal text white */
+  }
+
+  .bot strong, .bot b {
+    color: #4dabf7; /* light blue for emphasis */
+  }
+
+  .bot a {
+    color: #66b3ff; /* links visible in dark mode */
+  }
+}
     
     .bot .math-inline, .bot .math-block {
       background: rgba(106, 17, 203, 0.15);
