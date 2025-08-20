@@ -27,7 +27,7 @@ I love solving real-world problems using data-driven approaches and actively con
 Founding Engineer — Gryork (Full-time)
 📍 Delhi, India (Remote) | Aug 2025 – Present
 	•	Developing AIML-powered solutions to transform data into actionable insights.
-	•	Skills: NLP, Deep Learning, Machine Learning, TensorFlow
+	•	Skills: NLP, Deep Learning, Machine Learning, TensorFlow, LangChain
 
 Contributor — Open Source Connect (Part-time)
 📍 Remote | Jul 2025 – Present
@@ -76,6 +76,12 @@ Credential ID: 5064657
 ⸻
 
 🚀 Projects
+
+💬 Personal Chatbot (Aug 2025)
+• AI-powered chatbot fine-tuned on personal data (resumes, projects, profiles) with RAG + Gemini API.
+• Integrated with FastAPI backend, ChromaDB for vector storage, and a JS frontend.
+• Deployed on Render with environment-based secret management.
+• Tech Stack: FastAPI, LangChain, ChromaDB, Gemini API, HTML/CSS/JS, Render
 
 🧠 Sentiment Analysis (Jul 2025)
 	•	Built a stacking ensemble model (Logistic Regression + SGDClassifier + LinearSVC + MultinomialNB).
