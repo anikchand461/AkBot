@@ -77,11 +77,11 @@ Credential ID: 5064657
 
 🚀 Projects
 
-💬 Personal Chatbot (Aug 2025)
-• AI-powered chatbot fine-tuned on personal data (resumes, projects, profiles) with RAG + Gemini API.
-• Integrated with FastAPI backend, ChromaDB for vector storage, and a JS frontend.
-• Deployed on Render with environment-based secret management.
-• Tech Stack: FastAPI, LangChain, ChromaDB, Gemini API, HTML/CSS/JS, Render
+💬 Personal Chatbot (Aug 2025) - latest project
+	• AI-powered chatbot fine-tuned on personal data (resumes, projects, profiles) with RAG + Gemini API.
+	• Integrated with FastAPI backend, ChromaDB for vector storage, and a JS frontend.
+	• Deployed on Render with environment-based secret management.
+	• Tech Stack: FastAPI, LangChain, ChromaDB, Gemini API, HTML/CSS/JS, Render
 
 🧠 Sentiment Analysis (Jul 2025)
 	•	Built a stacking ensemble model (Logistic Regression + SGDClassifier + LinearSVC + MultinomialNB).

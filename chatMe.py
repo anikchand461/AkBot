@@ -41,7 +41,7 @@ qa_chain = RetrievalQA.from_chain_type(
 )
 
 # 7. Chat Example
-query = "What is Anik's resume link?"
+query = "What is Anik's latest project??"
 result = qa_chain({"query": query})
 
 print("Answer:", result["result"])
