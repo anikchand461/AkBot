@@ -1,0 +1,260 @@
+
+LeetCode Profile – Anik Chand
+	•	Profile URL: https://leetcode.com/u/anikchand461/
+	•	Username: anikchand461
+	•	Location: India
+	•	Rank: 1,205,070
+	•	Contest Rating: 1,467
+	•	Global Ranking (Contests): 406,000 / 737,635
+	•	Contests Attended: 3
+	•	Best Rating: 1,492 (May–Jul 2025)
+	•	Percentile: Top 55.55%
+	•	Contest Performance:
+	•	Accuracy: 73.26%
+	•	Beats (compared to peers):
+	•	84.79% in some contests
+	•	65.29% in others
+	•	40.33% in others
+
+Problem Solving Stats
+	•	Total Problems Solved: 123
+	•	Easy: 72 / 890
+	•	Medium: 31 / 1904
+	•	Hard: 4 / 862
+	•	By Language:
+	•	Java → 56 problems solved
+	•	Python3 → 46 problems solved
+	•	C++ → 17 problems solved
+	•	By Skill Category:
+	•	Advanced:
+	•	Dynamic Programming ×5
+	•	Divide and Conquer ×4
+	•	Backtracking ×3
+	•	Intermediate:
+	•	Math ×30
+	•	Binary Search ×22
+	•	Hash Table ×19
+	•	Fundamental:
+	•	Array ×58
+	•	Two Pointers ×21
+	•	String ×13
+
+Community Stats
+	•	Profile Views: 4
+	•	Solutions Shared: 3
+	•	Discuss Posts: 0
+	•	Reputation: 0
+
+Badges
+	•	50 Days Badge 2024 (Most Recent)
+
+Activity
+	•	Submissions in past year: 222
+	•	Active Days: 85
+	•	Max Streak: 12
+
+
+Code360 (Coding Ninjas) Profile – Anik Chand
+	•	Profile URL: https://www.naukri.com/code360/profile/anikchand
+	•	Profile Views: 82
+
+About
+
+Motivated and curious Computer Science student at Haldia Institute of Technology (HIT) with a strong interest in software development and machine learning.
+Hands-on experience in Python (with DSA and related areas).
+
+Education
+	•	Haldia Institute of Technology (HIT) – Class of 2028
+
+Skills
+	•	Default Language: Python
+	•	Strong focus on Data Structures and Algorithms (DSA) and Machine Learning
+
+Links
+	•	LinkedIn
+	•	GitHub
+
+
+GeeksforGeeks Profile – Anik Chand
+	•	Profile URL: https://www.geeksforgeeks.org/user/anikchand461/
+	•	Username: anikchand461
+
+Education
+	•	Institution: Haldia Institute of Technology (HIT), Haldia
+
+Stats
+	•	Current POTD (Problem of the Day) Streak: 20 / 1479 days
+	•	Rank: 681
+	•	Coding Score: 237
+	•	Problems Solved: 113
+	•	Contest Rating: Not available
+	•	Submissions (this year): 15
+
+Languages Used
+	•	Python
+	•	C++
+	•	Java
+
+
+CodeChef Profile – Anik Chand
+	•	Profile URL: https://www.codechef.com/users/anikchand461
+	•	Username: anikchand461
+	•	Country: India 🇮🇳
+	•	Student/Professional: Other
+	•	CodeChef Pro Plan: No Active Plan
+
+Practice Paths
+	•	Arrays, Strings & Sorting
+	•	Practice Go
+	•	Practice C
+	•	Practice Arrays
+	•	Practice Python
+	•	Practice Java
+
+Stats
+	•	Total Problems Solved: 80
+	•	Skill Tests: 77% (Python, attempted June 2025)
+
+Badges
+	•	Problem Solver – Bronze (for solving 50 problems)
+
+Recent Activity (Latest Submissions)
+	•	CFRTEST – Python 3 ✅
+	•	CFRTEST – Python 3 ✅
+	•	START01 – Go ✅
+	•	START01 – Go ✅
+	•	SEARCHINARR – Java ✅
+
+
+
+Codeforces Profile – Anik Chand
+	•	Profile URL: https://codeforces.com/profile/anikchand461
+	•	Username: anikchand461
+	•	Name: Anik
+	•	Rating: Unrated
+	•	Contribution: 0
+	•	Friends: 0 users
+	•	Last Visit: 7 weeks ago
+	•	Registered: 12 months ago
+
+Community Activity
+	•	Blog entries: 0
+	•	Comments: 0
+	•	Talks: Available (no active ones listed)
+
+
+
+HackerRank Profile – Anik Chand
+	•	Profile URL: https://www.hackerrank.com/profile/anikchand461
+	•	Username: anikchand461
+	•	Name: Anik Chand
+	•	Country: India
+
+Contact Info
+	•	Email: anikchand461@gmail.com
+	•	Phone: +91-9153772355
+	resume link : https://drive.google.com/file/d/1CdQwBAh4v6P90z_6Bm2dG1g8lLMJbpHh/view
+
+Badges
+	•	Problem Solving
+	•	Python
+	•	SQL
+	•	C Language
+
+Certifications
+	•	None yet
+
+Work Experience
+	•	ML Trainee – ISTE HIT SC (Indian Society for Technical Education) (March 2025 – Present)
+	•	Learning and contributing to ML projects, including data preprocessing, model building, and evaluation.
+	•	Deloitte Australia Technology Job Simulation – Forage (June 2025 – Present)
+	•	Completed simulation involving development, coding, and dashboard proposal.
+	•	Frontend Intern – Cyption Go Digital (Jan 2024 – Dec 2024)
+	•	Contributed to UI/UX development and web optimization.
+
+Education
+	•	B.Tech in Computer Science – Haldia Institute of Technology (Aug 2024 – Present)
+	•	CGPA: 8.59
+
+
+
+Codolio Profile – Anik Chand
+	•	Profile URL: (Not provided, but username: anikchand461)
+	•	Name: Anik Chand
+	•	Username/Handle: @anikchand461
+	•	Title: Aspiring AIML Engineer
+	•	Country: India
+	•	Institution: Haldia Institute of Technology
+
+About
+
+Aspiring AIML Engineer passionate about problem-solving, competitive programming, and development.
+
+Global Stats
+	•	Global Rank: 1014 (based on C Score)
+	•	Profile Views: 71
+	•	Total Questions Solved: 477
+	•	Total Active Days: 267
+	•	Total Submissions: 343
+	•	Max Streak: 45
+	•	Current Streak: 0
+	•	Total Contests: 14
+
+Platform Contributions
+	•	LeetCode: 3 contests, rating 1467 (max 1492)
+	•	CodeStudio: 11 contests, rating 1695 (max 1695), Rank #39 in Weekly Contest 191 (Aug 2025)
+	•	GeeksforGeeks: 41 problems solved
+	•	CodeChef: 80 problems solved
+	•	CodeForces: 6 problems solved
+	•	HackerRank: 32 problems solved
+
+Problem-Solving Stats
+	•	Fundamentals: 73 problems
+	•	DSA: 318 problems (228 Easy, 82 Medium, 8 Hard)
+	•	Competitive Programming: 86 problems
+
+Awards
+	•	17 Badges Earned (examples: C, Python, Problem Solving)
+
+DSA Topic Analysis
+	•	Arrays: 90
+	•	Algorithms: 48
+	•	Math: 30
+	•	HashMap & Set: 23
+	•	Binary Search: 22
+	•	Two Pointers: 21
+	•	Sorting: 21
+	•	Matrix: 17
+	•	Strings: 16
+
+Achievements
+	•	LeetCode Rating: 1467
+	•	CodeStudio Rating: 1695
+	•	Recognized as an Achiever on Codolio
+
+
+Youtube : ZenXcode : https://www.youtube.com/@ZenXcode
+
+🔹 Short (for LinkedIn / Codolio)
+
+🎥 I run ZenXcode, a coding YouTube channel (76+ subscribers, 21 videos) where I share Python projects, Turtle graphics, and hackathon demos.
+
+⸻
+
+🔹 Detailed (for portfolio / website)
+
+🎥 ZenXcode is my creative coding channel with 76+ subscribers and 21 videos, focused on making programming fun, visual, and practical.
+	•	🐍 Python Projects & Turtle Graphics (logos, emojis, animations, chessboard, landscapes)
+	•	⚙️ Mini-projects & Tech Demos (text-to-speech, WhatsApp automation, bouncing ball, etc.)
+	•	🚀 Hackathon Projects (Quizlic – MLH Track, EcoMate, Secure Line)
+
+📌 Goal: Helping beginners and aspiring developers learn coding through engaging visuals and real-world projects.
+
+
+
+📊 Active on Kaggle – Aspiring ML Engineer with experience in competitions like Predicting Optimal Fertilizers and Introverts vs Extroverts. Passionate about data, modeling, and learning from real-world datasets.
+
+
+
+Anik have Instagram and Facebook also ... but he is not active in these.
+

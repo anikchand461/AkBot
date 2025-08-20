@@ -1,0 +1,214 @@
+📄 Blog Post – DEV Community
+
+Title: Sentiment Analysis, the Classical Way — No Deep Learning
+Publisher: DEV Community
+Author: Anik Chand
+Date Published: Aug 6, 2025
+URL: https://dev.to/anikchand461/sentiment-analysis-the-classical-way-no-deep-learning-3lc6
+
+⸻
+
+Description (for LinkedIn post/entry):
+
+“Can you get high accuracy in sentiment analysis without deep learning?”
+That’s the question I asked myself — and the results surprised me.
+
+In this blog, I shared how I built a sentiment analysis system using only classical Machine Learning algorithms (no RNNs, LSTMs, or BERT!) and still reached an accuracy of 89.12%.
+
+🔹 Dataset: IMDb reviews (40k train, 10k test)
+🔹 Models Tried: Logistic Regression, LinearSVC, SGDClassifier, Naive Bayes, PassiveAggressive
+🔹 Best Result: 1-layer Stacking Ensemble → 89.12% Accuracy
+🔹 Key Tools: Scikit-learn, NLTK, Pandas, Matplotlib
+
+💡 Key Takeaways:
+	•	Traditional ML still holds strong in NLP tasks
+	•	Logistic Regression + TF-IDF is surprisingly powerful
+	•	Ensemble methods like stacking can outperform individual models
+
+
+
+
+📄 Blog Post – DEV Community
+
+Title: The Curve That Judges Your ML Model (AUC-ROC Explained)
+Publisher: DEV Community
+Author: Anik Chand
+Date Published: Jul 13, 2025
+URL: https://dev.to/anikchand461/understanding-the-auc-roc-curve-in-machine-learning-with-python-code-3nlc
+
+⸻
+
+Description (for LinkedIn/Portfolio):
+
+Ever felt proud of your model’s 95% accuracy, only to realize it’s misleading? That’s where the AUC-ROC curve comes in.
+
+In this blog, I explained ROC curves and AUC in the simplest possible way — with real-world examples, spam detection cases, and Python code.
+
+🔹 Why Accuracy Fails: Rare diseases, spam detection, churn prediction — accuracy isn’t enough.
+🔹 What ROC Shows: Trade-off between True Positives and False Positives at different thresholds.
+🔹 What AUC Means: Overall model performance across thresholds (1.0 = perfect, 0.5 = random).
+🔹 Code Demo: RandomForestClassifier with roc_curve and roc_auc_score.
+🔹 Key Learnings:
+	•	Accuracy isn’t always reliable
+	•	ROC curve = visual skill check
+	•	AUC = model ranking ability
+	•	Thresholds matter for business impact
+
+📌 By the end, you’ll understand how to read, interpret, and implement AUC-ROC in your own ML projects.
+
+⸻
+
+👉 Repo/Notebook can also be added if you have one.
+
+
+
+📄 Blog Post – DEV Community
+
+Title: 🚢 OneHotEncoder Shape Mismatch Mystery in Titanic Dataset — Solved!
+Publisher: DEV Community
+Author: Anik Chand
+Date Published: Apr 7, 2025 (Edited Jul 13, 2025)
+URL: https://dev.to/anikchand461/onehotencoder-shape-mismatch-mystery-in-titanic-dataset-solved-3n6
+
+⸻
+
+Description (for LinkedIn/Portfolio):
+
+While working on the Titanic dataset (CampusX course), I ran into a tricky issue:
+
+My OneHotEncoder gave different shapes for train and test sets — (712, 4) vs (179, 3). 🤯
+
+After debugging, I realized:
+	•	Missing values were not assigned back to the original DataFrame after SimpleImputer
+	•	Encoder treated NaN as a new category, creating extra columns in train data
+	•	Test data had no NaN → fewer categories → shape mismatch
+
+✅ Fix: Always impute back into your DataFrame before encoding.
+
+📌 Key Learnings:
+	•	Always handle missing values before encoding
+	•	handle_unknown='ignore' avoids errors, but doesn’t fix mismatched categories
+	•	Careful order of preprocessing steps = stable pipeline
+
+This debugging session was a great reminder that data preprocessing mistakes can silently break ML models. Hopefully, it saves someone else hours of confusion!
+
+
+
+
+📌 Regression in ML — Knowledge Notes
+url - https://dev.to/anikchand461/regression-in-ml-explained-the-ultimate-hands-on-guide-484f
+Posted on Mar 19, 2025
+
+🔹 What is Regression?
+	•	Regression = Predicting continuous values (numbers).
+	•	Examples: House prices 🏡, stock trends 📈, sales forecasting 🛍️, weather 🌦️.
+
+⸻
+
+1️⃣ Linear Regression
+	•	Assumes a straight-line relation between X and Y.
+	•	Formula: Y = b₀ + b₁X + ε
+	•	✅ Uses: stock prices, sales, real estate, medical risk analysis.
+	•	⚠️ Check assumptions: linearity, independence, residuals.
+
+⸻
+
+2️⃣ Multiple Linear Regression
+	•	Predicts using multiple features.
+	•	Formula: Y = b₀ + b₁X₁ + b₂X₂ + … + bₙXₙ + ε
+	•	✅ Uses: house pricing (size, bedrooms, location).
+	•	⚠️ Challenges: overfitting, feature selection, normalization.
+
+⸻
+
+3️⃣ Polynomial Regression
+	•	Captures non-linear (curved) data.
+	•	Formula: Y = b₀ + b₁X + b₂X² + … + bₙXⁿ + ε
+	•	✅ Uses: salary growth, COVID-19 trends, vehicle performance.
+	•	⚠️ Risk of overfitting with high degree.
+
+⸻
+
+4️⃣ Logistic Regression (Classification)
+	•	Despite name → used for classification (Yes/No).
+	•	Formula: P = 1 / (1 + e^(-z)) (Sigmoid function).
+	•	✅ Uses: spam detection, pass/fail, customer conversion.
+
+⸻
+
+
+
+
+another blog ...
+
+
+
+🎮 Hangman Game — Knowledge Notes
+
+url - https://dev.to/anikchand461/crafting-fun-with-code-my-journey-building-the-hangman-game-11ih
+posted on Jan 7, 2025
+
+📌 Motivation
+	•	First blog inspired by friend Abhiraj Adhikary.
+	•	Purpose: Learn Python + share knowledge with community.
+
+⸻
+
+🕹️ What is Hangman?
+	•	Classic word-guessing game.
+	•	Guess letters → incorrect guesses draw parts of stick figure.
+	•	Tests vocabulary, logic, and problem-solving.
+
+⸻
+
+🎯 Objective
+	•	Fun game with categories (sports, food, animals).
+	•	Learn Python concepts: loops, conditionals, random module.
+	•	Improve logic-building and coding confidence.
+
+⸻
+
+✨ Features
+	•	Diverse categories (sports, food, animals).
+	•	Random word selection → unpredictable gameplay.
+	•	ASCII Art → visual Hangman + win/lose graphics.
+	•	Replay option → multiple rounds.
+	•	User-friendly → error handling, score keeping.
+	•	Difficulty Levels: easy (1–5 letters), medium (5–7), hard (8+).
+
+⸻
+
+🛠️ Tech Stack
+	•	Language: Python 🐍
+	•	Libraries:
+	•	random → select words
+	•	os → clear screen between turns
+
+⸻
+
+🔄 Development Stages
+	1.	Basic Version
+	•	Predefined word, dashes, letter replacement.
+	•	Player wins if word guessed, else game over.
+	2.	Improvements
+	•	Replace all occurrences of guessed letters.
+	•	Lives system (6 attempts).
+	3.	Enhancements
+	•	Categories (sports, food, animals).
+	•	Difficulty levels.
+	•	ASCII art for progress + endings.
+	•	Replay loop + game summary.
+
+⸻
+
+📚 Lessons Learned
+	1.	Problem-Solving → Debugging errors, handling invalid inputs, edge cases.
+	2.	Time Management → Balancing learning + coding, prioritizing features.
+
+⸻
+
+🔗 Repo
+
+👉 GitHub: Hangman Game
+
+

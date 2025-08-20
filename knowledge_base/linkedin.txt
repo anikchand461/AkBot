@@ -1,0 +1,128 @@
+👤 About Me at linkedin
+
+I am Anik Chand, passionate about AI/ML, deep learning, and building intelligent systems.
+I love solving real-world problems using data-driven approaches and actively contribute to open-source projects and mentoring initiatives.
+
+📍 Location: Tantipara, Birbhum, West Bengal, India
+📧 Email: anikchand461@gmail.com
+📞 Phone: +91 9153772355
+🏠 Address: Google Maps
+🔗 LinkedIn: linkedin.com/in/anik-chand-3b14b12b6
+
+2,366 followers 
+500+ connections
+
+⸻
+
+🛠️ Skills
+	•	Programming & Web: Python, Java, HTML, CSS, JavaScript, WordPress
+	•	AI/ML & Data Science: Machine Learning, Deep Learning, NLP, TensorFlow, Random Forest, Model Validation, Kaggle Competitions
+	•	Core CS: Data Structures, Programming Fundamentals, OOPs in Python
+	•	Frontend: Bulma, HTML5, CSS
+
+⸻
+
+💼 Experience
+
+Founding Engineer — Gryork (Full-time)
+📍 Delhi, India (Remote) | Aug 2025 – Present
+	•	Developing AIML-powered solutions to transform data into actionable insights.
+	•	Skills: NLP, Deep Learning, Machine Learning, TensorFlow
+
+Contributor — Open Source Connect (Part-time)
+📍 Remote | Jul 2025 – Present
+	•	Contributing to open-source AI/ML projects.
+	•	Skills: Python, Machine Learning, Deep Learning
+
+Mentor — GirlScript Summer of Code (Part-time)
+📍 Remote | Jul 2025 – Present
+	•	Mentoring contributors in Python and ML projects.
+	•	Skills: Python, Machine Learning, Deep Learning
+
+Technical Team Member — ISTE (HIT SC)
+📍 Haldia, West Bengal, India | Mar 2025 – Present
+	•	Contributed to technical and leadership initiatives.
+	•	Mentored participants at BitsNBytes 2025 (DSA + technical guidance).
+	•	Supported event planning, mentoring, and workshops.
+
+Technology Intern — Forage
+📍 Remote, Australia | Jun 2025
+	•	Completed Deloitte Australia Technology Job Simulation.
+	•	Developed a dashboard project proposal.
+	•	Skills: Python, Software Engineering
+
+Intern — Cyption
+📍 Remote, Durgapur, India | Oct 2024 – Jan 2025
+	•	Worked on client-ready web development projects (HTML, CSS, JS, WordPress).
+	•	Skills: WordPress, HTML5, CSS, Bulma
+
+⸻
+
+📜 Licenses & Certifications
+	•	Deloitte Australia – Technology Job Simulation (Jun 2025)
+Credential ID: zKo6BQcd48tWqdQ7Y | Python, Data Structures, Programming
+	•	Kaggle – Intro to Machine Learning (Jun 2025)
+Random Forest, Model Validation, Kaggle Competitions
+	•	OLake by Datazip – Apertre 2.0 (Apr 2025)
+Credential ID: f5a8208b-49c0-4394-b14c-c5277ec2197a
+	•	Great Learning – Introduction to Programming Using Java (Aug 2024)
+	•	Great Learning – HTML Frontend (Jun 2024)
+	•	Great Learning – Python TKinter (May 2024)
+	•	Simplilearn – Introduction to Duet AI in Google Workspace (Apr 2024)
+Credential ID: 5064657
+	•	Great Learning – OOPs in Python (Apr 2024)
+	•	Great Learning – Python Fundamentals (Apr 2024)
+
+⸻
+
+🚀 Projects
+
+🧠 Sentiment Analysis (Jul 2025)
+	•	Built a stacking ensemble model (Logistic Regression + SGDClassifier + LinearSVC + MultinomialNB).
+	•	Achieved 89.15% accuracy with 5-fold CV.
+	•	Skills: Machine Learning, SVM, Naive Bayes, Gradient Boosting, Stacking, Voting Classifier
+
+🔧 GitCollab (Apr – May 2025)
+	•	Web app for open-source collaboration with GitHub OAuth.
+	•	Tech Stack: Django, Bulma, JS, GitHub OAuth, Render
+	•	Live Demo | Source Code
+
+💰 SalaryAi (May 2025)
+	•	ML-powered salary prediction app.
+	•	Tech: FastAPI backend, HTML/CSS/JS frontend, Polynomial Regression
+
+🧾 BillVault (Apr 2025)
+🏆 2nd Place — TRINITY Hackathon (IETE, HIT)
+	•	Smart bill & warranty tracker with OCR + LLM.
+	•	Tech Stack: Django, JS, SQLite, OCR Space API, Gemini Flash 2.0
+
+🎮 Hangman Game (Jun 2024)
+	•	Python console game with ASCII art & word categories.
+	•	GitHub
+
+🌿 EcoMate
+	•	Platform for eco-friendly habits.
+	•	Tech: Django, Bulma CSS, SQL, JavaScript
+
+⸻
+
+✍️ Publications (on DEV Community)
+	•	Sentiment Analysis, the Classical Way — No Deep Learning (Aug 2025)
+	•	The Curve That Judges Your ML Model (AUC-ROC Explained) (Jul 2025)
+	•	OneHotEncoder Shape Mismatch Mystery in Titanic Dataset — Solved! (Apr 2025)
+	•	Regression in ML Explained! 🚀 The Ultimate Hands-on Guide (Mar 2025)
+	•	Crafting Fun with Code: My Journey Building the Hangman Game (Jan 2025)
+
+⸻
+
+🏆 Test Scores
+	•	WBJEE 2024: Score 54.3334 / 200
+	•	GMR Rank (AIR): 7969
+	•	Institute: Haldia Institute of Technology (B.Tech CSE, 2028)
+
+⸻
+
+🌐 Languages
+	•	Bengali
+	•	Hindi
+	•	English
