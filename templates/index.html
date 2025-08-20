@@ -366,12 +366,15 @@
         max-width: 90%;
         font-size: 15px;
       }
+  #input-box {
+    padding: 10px 12px;
+    padding-bottom: max(50px, env(safe-area-inset-bottom)); /* increased gap */
+    gap: 8px;
+  }
 
-      #input-box {
-        padding: 10px 12px;
-        padding-bottom: max(10px, env(safe-area-inset-bottom));
-        gap: 8px;
-      }
+  #chat-container {
+    padding-bottom: 20px; /* pushes input box up */
+  }
 
       input {
         padding: 8px 12px;
