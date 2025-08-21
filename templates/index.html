@@ -378,7 +378,7 @@
       }
   #input-box {
     padding: 10px 12px;
-    padding-bottom: max(80px, env(safe-area-inset-bottom)); /* increased gap */
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
     gap: 8px;
   }
 
@@ -513,6 +513,11 @@
   </div>
 
   <script>
+window.visualViewport?.addEventListener("resize", () => {
+  const msgBox = document.getElementById("messages");
+  msgBox.scrollTop = msgBox.scrollHeight;
+});
+    let isProcessing = false;
     function formatText(text) {
       // Convert markdown-like syntax to HTML
       return text
@@ -551,8 +556,11 @@
     }
 
     async function sendMessage() {
+      if (isProcessing) return; 
       const query = document.getElementById("query").value.trim();
       if (!query) return;
+
+      isProcessing = true;
 
       const msgBox = document.getElementById("messages");
       const userMsg = document.createElement("div");
@@ -608,6 +616,7 @@
       }
 
       msgBox.scrollTop = msgBox.scrollHeight;
+      isProcessing = false;
     }
 
     // Auto-focus input on desktop
