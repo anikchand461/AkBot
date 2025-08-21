@@ -77,7 +77,7 @@ Credential ID: 5064657
 
 🚀 Projects
 
-💬 Personal Chatbot (Aug 2025) - latest project
+💬 AkBot (Aug 2025) - latest project
 	• AI-powered chatbot fine-tuned on personal data (resumes, projects, profiles) with RAG + Gemini API.
 	• Integrated with FastAPI backend, ChromaDB for vector storage, and a JS frontend.
 	• Deployed on Render with environment-based secret management.

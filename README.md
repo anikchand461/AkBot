@@ -46,7 +46,7 @@ An AI-powered **personalized chatbot** built using **RAG + Gemini API**, integra
 
 4. **Run the backend**  
    ```bash
-   uvicorn app.main:app --reload
+   uvicorn main:app --reload
    ```
 
 5. **Open the frontend**  

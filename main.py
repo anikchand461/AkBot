@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
+import asyncio
 from db import init_db, save_chat
 from chat import get_bot_response
 
@@ -27,6 +28,9 @@ app.add_middleware(
 class ChatRequest(BaseModel):
     query: str
 
+# Create a lock for DB operations (SQLite is not fully async-safe)
+db_lock = asyncio.Lock()
+
 # ===== Routes =====
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
@@ -34,6 +38,11 @@ async def home(request: Request):
 
 @app.post("/chat")
 async def chat(req: ChatRequest):
-    answer = get_bot_response(req.query)
-    save_chat(req.query, answer)
+    # Run the bot response in a separate thread if it's blocking
+    answer = await asyncio.to_thread(get_bot_response, req.query)
+
+    # Ensure DB writes don’t collide
+    async with db_lock:
+        await asyncio.to_thread(save_chat, req.query, answer)
+
     return {"answer": answer}
