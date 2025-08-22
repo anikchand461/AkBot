@@ -652,6 +652,13 @@ window.addEventListener("load", () => {
     if (window.innerWidth > 768) {
       document.getElementById("query").focus();
     }
+
+    function scrollToBottom() {
+  const msgBox = document.getElementById("messages");
+  setTimeout(() => {
+    msgBox.scrollTop = msgBox.scrollHeight;
+  }, 50);
+}
   </script>
 </body>
 </html>
