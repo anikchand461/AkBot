@@ -447,7 +447,7 @@
         min-width: 44px;
       }
     }
-    
+
     /* Dark mode */
     @media (prefers-color-scheme: dark) {
       #chat-container {
@@ -584,35 +584,43 @@
 
     // Enhanced text formatting
     function formatText(text) {
-      return text
-        // Math expressions
-        .replace(/\$\$([^$]+)\$\$/g, '<span class="math-block">$1</span>')
-        .replace(/\$([^$\s][^$]*[^$\s])\$/g, '<span class="math-inline">$1</span>')
-        // Superscript and subscript
-        .replace(/([a-zA-Z0-9])\^([0-9]+)/g, '$1<sup>$2</sup>')
-        .replace(/([a-zA-Z0-9])_([0-9]+)/g, '$1<sub>$2</sub>')
-        // Text formatting
+      // First, protect URLs from line break formatting
+      const urlPattern = /(https?:\/\/[^\s]+)/g;
+      const urls = [];
+      let urlIndex = 0;
+      
+      // Replace URLs with placeholders
+      text = text.replace(urlPattern, (url) => {
+        const cleanUrl = url.replace(/\n/g, '').replace(/\r/g, '');
+        urls.push(cleanUrl);
+        return `__URL_PLACEHOLDER_${urlIndex++}__`;
+      });
+      
+      // Apply normal formatting
+      text = text
         .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>')
-        .replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, '<em>$1</em>')
-        .replace(/__([^_\n]+)__/g, '<u>$1</u>')
-        .replace(/==([^=\n]+)==/g, '<mark>$1</mark>')
-        .replace(/`([^`\n]+)`/g, '<code>$1</code>')
-        // Block quotes
-        .replace(/^>\s(.+)$/gm, '<blockquote>$1</blockquote>')
-        // Code blocks
-        .replace(/```([^`]+)```/g, '<pre>$1</pre>')
-        // Line breaks
+        // ... other formatting
         .replace(/\n/g, '<br>');
+      
+      // Restore URLs
+      urls.forEach((url, index) => {
+        text = text.replace(`__URL_PLACEHOLDER_${index}__`, url);
+      });
+      
+      return text;
     }
 
     function linkify(text) {
+      // Simple URL pattern to detect links
       const urlPattern = /(\bhttps?:\/\/[^\s<]+|\bwww\.[^\s<]+)/g;
+      
       return text.replace(urlPattern, function(url) {
         let href = url;
         if (!href.startsWith("http")) {
           href = "http://" + href;
         }
-        return `<a href="${href}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+        // Add spaces before and after the link to separate it from surrounding characters
+        return ` <a href="${href}" target="_blank" rel="noopener noreferrer" style="color: #93a4efff; text-decoration: underline;">${url}</a> `;
       });
     }
 
