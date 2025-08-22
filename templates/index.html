@@ -348,9 +348,9 @@
       }
 
       #messages {
+        height: calc(100vh - 60px); /* Adjust for header + input */
         padding: 15px;
-        height: calc(100vh - 60px); /* Adjust for header and input */
-        padding-bottom: 60px; /* Ensure space for input */
+        padding-bottom: 100px; /* ✅ same fix here */
       }
 
       .msg {
@@ -397,8 +397,8 @@
       }
 
       #messages {
-        height: calc(100vh - 50px); /* Adjust for smaller input height */
-        padding-bottom: 50px;
+        height: calc(100vh - 50px); 
+        padding-bottom: 80px; 
       }
 
       input {
