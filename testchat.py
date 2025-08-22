@@ -1,29 +1,37 @@
 import os
+import random
 from dotenv import load_dotenv
+
+from langchain_community.document_loaders import TextLoader
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from langchain_community.vectorstores import Chroma
+from langchain_community.vectorstores import FAISS
 from langchain.chat_models import init_chat_model
 from langchain.chains import ConversationalRetrievalChain
-from langchain.retrievers import EnsembleRetriever
 from langchain.prompts import PromptTemplate
-import random
 
 # Load environment variables
 load_dotenv()
 
-# ===== Step 1. Load the 4 existing DBs =====
+# ===== Step 1. Load knowledge base =====
 embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
-db_paths = ["./chroma_db1", "./chroma_db2", "./chroma_db3", "./chroma_db4"]
+knowledge_dir = "knowledge_base"
+faiss_index_path = "./faiss_index"
 
-dbs = [Chroma(persist_directory=path, embedding_function=embeddings) for path in db_paths]
-retrievers = [db.as_retriever() for db in dbs]
+# Build FAISS index only once
+if not os.path.exists(faiss_index_path):
+    documents = []
+    for file in os.listdir(knowledge_dir):
+        if file.endswith(".txt"):
+            loader = TextLoader(os.path.join(knowledge_dir, file), encoding="utf-8")
+            documents.extend(loader.load())
 
-# Merge retrievers (equal weights)
-merged_retriever = EnsembleRetriever(
-    retrievers=retrievers,
-    weights=[0.25, 0.25, 0.25, 0.25]
-)
+    db = FAISS.from_documents(documents, embeddings)
+    db.save_local(faiss_index_path)
+else:
+    db = FAISS.load_local(faiss_index_path, embeddings, allow_dangerous_deserialization=True)
+
+retriever = db.as_retriever()
 
 # ===== Step 2. Gemini Flash model =====
 llm = init_chat_model(
@@ -34,6 +42,7 @@ llm = init_chat_model(
 
 chat_history = []
 
+# ===== Step 3. Custom System Prompt =====
 system_prompt = """
 You are AkBot 🤖, a friendly AI assistant built by Anik Chand.
 
@@ -57,13 +66,13 @@ Question: {question}
 """
 
 prompt = PromptTemplate(
-    input_variables=["context", "question"],  
+    input_variables=["context", "question"],
     template=system_prompt
 )
 
 qa_chain = ConversationalRetrievalChain.from_llm(
     llm=llm,
-    retriever=merged_retriever,
+    retriever=retriever,
     return_source_documents=False,
     combine_docs_chain_kwargs={"prompt": prompt},
     verbose=False
@@ -75,7 +84,7 @@ def safe_invoke(query, history):
         return "I’m here to talk about Anik Chand and his work only. Would you like to hear about his projects or skills? 🙂"
     return result["answer"]
 
-# ===== Step 3. Small Talk =====
+# ===== Step 4. Small Talk =====
 small_talk_responses = {
     "hi": [
         "Hey! 👋 Nice to see you here.",
@@ -130,13 +139,12 @@ small_talk_responses = {
 }
 
 def is_small_talk(query: str):
-    q = query.lower().strip()
-    return q in small_talk_responses
+    return query.lower().strip() in small_talk_responses
 
 def handle_small_talk(query: str) -> str:
     return random.choice(small_talk_responses[query.lower().strip()])
 
-# ===== Step 4. Chat Loop =====
+# ===== Step 5. Chat Loop =====
 while True:
     query = input("You: ")
 
@@ -145,13 +153,11 @@ while True:
         break
 
     # Small talk check
-    q = query.lower().strip()
-    if q in small_talk_responses:
-        response = random.choice(small_talk_responses[q])
-        print("Bot:", response)
+    if is_small_talk(query):
+        print("Bot:", handle_small_talk(query))
         continue
 
-    # Use RAG with safe_invoke
+    # Otherwise → use RAG
     answer = safe_invoke(query, chat_history)
 
     # Save conversation

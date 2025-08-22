@@ -39,6 +39,7 @@ mobile : +91 9153772355
 ### 💬 AkBot
 
 project link live link : https://akbot-mxe4.onrender.com
+github link : https://github.com/anikchand461/AkBot
 
 An AI-powered personalized chatbot built using RAG + Gemini API, integrated with FastAPI backend, ChromaDB for vector storage, and a responsive JS frontend. Deployed seamlessly on Render.
 
@@ -53,7 +54,7 @@ An AI-powered personalized chatbot built using RAG + Gemini API, integrated with
 🛠 Tech Stack
 
 Backend: FastAPI, LangChain
-Vector DB: ChromaDB
+Vector DB: ChromaDB (used earlier) -> now used : FAISS 
 LLM API: Gemini API
 Frontend: HTML, CSS, JavaScript
 Deployment: Render
@@ -91,6 +92,7 @@ Deploy 🚀
 Generate high-quality, engaging Twitter (X) posts and matching AI-generated images based on your content's tone — whether it's for casual users, blue-tick professionals, or golden-tick brands.
 
 🌐 Live Demo
+github link : https://github.com/anikchand461/tierlesstweet
 
 🚀 Features
 
@@ -179,6 +181,7 @@ Made with ❤️ by Abhiraj Adhikary and Anik Chand
 This project demonstrates a stacking ensemble for a classification task on a high-dimensional, sparse dataset. It leverages several classical machine learning algorithms and builds a deep stacking pipeline with performance tuning and cross-validation to achieve high accuracy.
 
 live link : https://sentimentt-analysis.streamlit.app
+giyhub link : https://github.com/anikchand461/sentiment-analysis
 
 📊 Dataset
 
@@ -287,7 +290,8 @@ Conclusion: Layer 1 was already optimal. Extra depth didn’t help.
 
 A Streamlit web app that predicts whether a person is an introvert or extrovert based on behavioral traits using a Random Forest Classifier.
 
-🔗 Live Demo
+🔗 Live Demo : https://sentimentt-analysis.streamlit.app
+github repo link : https://github.com/anikchand461/sentiment-analysis
 
 👉 Click to Try the App
 
@@ -362,6 +366,10 @@ Quizly is a state-of-the-art quiz generation application that utilizes the Googl
 
 Features • AI-driven generation of dynamic, multiple-choice questions across a wide range of topics • Provides instant feedback and assessment for questions • Integrates with the Google Gemini API for advanced, context-rich question generation • User-friendly, clean, and minimalist interface
 
+live demo / live link :  https://quizly-6oo5.onrender.com
+github repo link : https://github.com/anikchand461/quizly
+
+
 Tech Stack
 
 Layer Technology Backend FastAPI Frontend HTML, CSS, JavaScript AI Model Google Gemini via API
@@ -403,6 +411,8 @@ AI-Powered Crime Hotspot Prediction & Reporting Platform
 📌 Overview
 
 This project is an AI-driven platform that allows users to anonymously report harassment cases while utilizing Machine Learning to predict potential crime hotspots. By combining crowdsourced data and AI-based analysis, it helps authorities and the public identify high-risk areas and take preventive measures.
+
+github link : https://github.com/anikchand461/Report-Connect
 
 🔥 Key Features
 
@@ -502,6 +512,9 @@ Anik Chand, Abhiraj Adhikary, Anirban Chakraborty, Ayan Roy
 
 SalaryAi is an AI-powered salary prediction web application built using FastAPI, Machine Learning, HTML, CSS, and JavaScript. It enables users to input professional details such as age, gender, education level, job title, and years of experience — and instantly get a predicted salary based on trained data.
 
+live link : https://salaryai.onrender.com
+github repo : https://github.com/anikchand461/SalaryAi
+
 ⚠️ Note: This application is based on salary data from the United States. Predictions are aligned with typical U.S. salary ranges.
 🚀 Features
 
@@ -573,6 +586,7 @@ Anik Chand LinkedIn • GitHub
 BillVault is a Django-powered web application for managing and tracking bills securely and efficiently. It allows users to register, log in, and perform tasks like creating, viewing, and managing their bills.
 
 🔗 Live Site: https://billvault.pythonanywhere.com/accounts/login/
+github repo : https://github.com/anikchand461/WarrantyManager
 
 ✨ Features
 
@@ -643,6 +657,8 @@ Anik Chand , Abhiraj Adhikary, Ayan Roy, Anchal Sharma
 ### GitCollabIn
 
 GitCollabIn is a web application designed to connect developers, foster collaboration, and streamline open-source project management. Integrated with GitHub, it allows users to share and contribute to projects while matching their skills with relevant opportunities.
+
+github link : https://github.com/anikchand461/GitCollabIn
 
 Key Features
 
@@ -771,6 +787,8 @@ EcoFix Banner
 
 Welcome to EcoFix – a comprehensive platform dedicated to promoting environmental awareness and sustainability! 🚀 Whether you're passionate about reducing your carbon footprint or tracking environmental observations, EcoFix has you covered.
 
+github link : https://github.com/anikchand461/EcoFix
+
 📦 Features
 
 ✨ Submit Environmental Observations
@@ -856,6 +874,8 @@ Overview
 The Global Disaster Network (GAN) is a comprehensive disaster management platform designed to empower communities, authorities, and individuals by providing real-time tools and resources to predict, monitor, and respond to natural disasters and calamities. Built with a focus on connectivity, accessibility, and transparency, GAN aims to reduce the impact of disasters through proactive measures, community engagement, and advanced technology.
 
 This project leverages modern web technologies, AI-driven predictions, and real-time data to create a robust system for disaster preparedness and response. Below is a detailed breakdown of the features, setup instructions, and API documentation for developers.
+
+github link : https://github.com/anikchand461/global_disaster_network
 
 Features
 
@@ -1025,6 +1045,8 @@ Anik Chand, Abhiraj Adhikary, Ayan Roy, Bholanath Dey
 
 ### Secure Line
 
+repo link : https://github.com/anikchand461/SecureLine
+
 Same as the project "Report Connect"
 
 
@@ -1035,6 +1057,8 @@ Same as the project "Report Connect"
 
 
 ### EcoMate
+
+repo link : https://github.com/anikchand461/EcoMate
 
 same as project "EcoFix"
 
