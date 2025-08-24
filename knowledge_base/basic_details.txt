@@ -47,7 +47,7 @@ An AI-powered personalized chatbot built using RAG + Gemini API, integrated with
 
 🧠 Retrieval-Augmented Generation (RAG) for contextual answers from personal/project data
 ⚡ FastAPI Backend for handling chatbot requests
-📂 ChromaDB as vector database for efficient embeddings & retrieval
+📂 FAISS index for efficient embeddings & retrieval
 🤖 Gemini API integration for LLM responses
 🌐 Frontend with HTML/CSS/JS for chat interface
 ☁️ Deployed on Render with environment-based API key management
