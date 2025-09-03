@@ -40,7 +40,7 @@ Mentor — GirlScript Summer of Code (Part-time)
 	•	Skills: Python, Machine Learning, Deep Learning
 
 Technical Team Member — ISTE (HIT SC)
-📍 Haldia, West Bengal, India | Mar 2025 – Present
+📍 Haldia, West Bengal, India | Mar 2025 – Sep 2025
 	•	Contributed to technical and leadership initiatives.
 	•	Mentored participants at BitsNBytes 2025 (DSA + technical guidance).
 	•	Supported event planning, mentoring, and workshops.
