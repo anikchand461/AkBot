@@ -11,6 +11,7 @@ you can go beyong that scope ... but not too much. You can do simple maths calcu
 
 
 The details of me (Anik Chand) are below:
+(the projects are arranged from newest to old .. means the projects that are mentioned 1st they are built recently .. and the projects that are in the last .. built ago)
 
 
 📄 Knowledge Base: Anik Chand
@@ -36,6 +37,84 @@ mobile : +91 9153772355
 
 
 ## projects made by Anik Chand
+
+
+
+
+### PregX
+
+repo link : https://github.com/anikchand461/PregX
+lie project link : https://pregx.onrender.com/login
+
+PregaCab
+
+This project is a Flask-based web application that eliminates the traditional hospital role in ambulance allocation.
+Instead, patients can directly connect with available ambulance drivers. Once a driver accepts a request, they can:
+
+📍 View the route from the ambulance to the patient’s home.
+🏥 See nearby hospitals relative to the patient’s location.
+🛠️ Tech Stack
+
+Frontend: HTML, CSS, Vanilla JavaScript
+Backend: Flask (Python), LangChain
+Database: SQLite
+Mapping: Leaflet.js / Google Maps API (for live route + hospitals)
+API: Gemini-2.5-flash
+⚙️ Installation
+
+1️⃣ Clone the repository
+
+git clone https://github.com/anikchand461/ambulance-direct-connect.git
+cd ambulance-direct-connect
+Create and activate virtual environment
+
+python -m venv venv
+source venv/bin/activate   # macOS/Linux
+venv\Scripts\activate      # Windows
+install dependencies
+
+pip install -r requirements.txt
+Initialize database
+
+flask db init
+flask db migrate -m "Initial migration."
+flask db upgrade
+Run the application
+
+python app.py
+the app will be available at http://127.0.0.1:5000
+
+🔑 Core Features
+
+Patient → Driver direct connection** (no hospital intermediate).
+Ambulance Route Tracking: Driver can see the shortest path to patient’s location.
+Nearby Hospital Locator: Once patient’s address is confirmed, nearby hospitals are shown.
+Lightweight Frontend using Vanilla JS + Leaflet/Maps API.
+SQLite Database for storing patients, drivers, and ride logs.
+Chatbot integrated with the website (made with LangChain and gemini-2.5-flash LLM)
+
+📊 Future Enhancements
+
+📡 Real-time updates via WebSockets
+📱 Mobile-first UI for faster patient requests
+🤖 AI-based risk predictor (integration with patient health data)
+
+contributors : Anik Chand, Aritra Karan, Shreya Ghorui, Abhiraj Adhikary (helped building the backend)
+
+
+
+
+
+
+### PregaCab
+
+same project as PregX
+
+
+
+
+
+
 
 ### 💬 AkBot
 
@@ -1068,77 +1147,4 @@ same as project "EcoFix"
 
 
 
-
-
-
-### PregX
-
-repo link : https://github.com/anikchand461/PregX
-lie project link : https://pregx.onrender.com/login
-
-PregaCab
-
-This project is a Flask-based web application that eliminates the traditional hospital role in ambulance allocation.
-Instead, patients can directly connect with available ambulance drivers. Once a driver accepts a request, they can:
-
-📍 View the route from the ambulance to the patient’s home.
-🏥 See nearby hospitals relative to the patient’s location.
-🛠️ Tech Stack
-
-Frontend: HTML, CSS, Vanilla JavaScript
-Backend: Flask (Python), LangChain
-Database: SQLite
-Mapping: Leaflet.js / Google Maps API (for live route + hospitals)
-API: Gemini-2.5-flash
-⚙️ Installation
-
-1️⃣ Clone the repository
-
-git clone https://github.com/anikchand461/ambulance-direct-connect.git
-cd ambulance-direct-connect
-Create and activate virtual environment
-
-python -m venv venv
-source venv/bin/activate   # macOS/Linux
-venv\Scripts\activate      # Windows
-install dependencies
-
-pip install -r requirements.txt
-Initialize database
-
-flask db init
-flask db migrate -m "Initial migration."
-flask db upgrade
-Run the application
-
-python app.py
-the app will be available at http://127.0.0.1:5000
-
-🔑 Core Features
-
-Patient → Driver direct connection** (no hospital intermediate).
-Ambulance Route Tracking: Driver can see the shortest path to patient’s location.
-Nearby Hospital Locator: Once patient’s address is confirmed, nearby hospitals are shown.
-Lightweight Frontend using Vanilla JS + Leaflet/Maps API.
-SQLite Database for storing patients, drivers, and ride logs.
-Chatbot integrated with the website (made with LangChain and gemini-2.5-flash LLM)
-
-📊 Future Enhancements
-
-📡 Real-time updates via WebSockets
-📱 Mobile-first UI for faster patient requests
-🤖 AI-based risk predictor (integration with patient health data)
-
-contributors : Anik Chand, Aritra Karan, Shreya Ghorui, Abhiraj Adhikary (helped building the backend)
-
-
-
-
-
-
-
-
-### PregaCab
-
-same project as PregX
 
