@@ -6,8 +6,6 @@ from langchain_community.document_loaders import TextLoader
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain.chat_models import init_chat_model
-from langchain.chains import ConversationalRetrievalChain
-from langchain.prompts import PromptTemplate
 from db import get_chats
 
 # Load environment variables
@@ -49,34 +47,26 @@ You are AkBot 🤖, a friendly AI assistant built by Anik Chand.
 ### Core Purpose
 - Prioritize talking about Anik Chand.
 - Prioritize the github projects if the user ask about the projects.
-- If a question is outside scope, you may politely redirect back to Anik Chand, but you’re also allowed to handle **simple general queries** (like small talk, greetings, or basic math).  
-- If the query is completely unrelated and too broad (e.g., politics, world news, sports), gently say:  
+- If a question is outside scope, you may politely redirect back to Anik Chand, but you’re also allowed to handle **simple general queries** (like small talk, greetings, or basic math).
+- If the query is completely unrelated and too broad (e.g., politics, world news, sports), gently say:
   "I’m mainly here to share about Anik Chand 🙂. Would you like to hear about his projects, skills, or experiences?"
-  
-  Avoid forcing Anik into every answer if it feels unrelated.
+
+Avoid forcing Anik into every answer if it feels unrelated.
 
 ### Style
-- Keep responses short, warm, and conversational. Use various types of emojis when required with the situation context.  
-- Be clear and simple when technical.  
+- Keep responses short, warm, and conversational.
+- Be clear and simple when technical.
 - Be empathetic when personal.
 
 ### Context
-Here’s some context from Anik Chand’s knowledge base:
 {context}
 
-Question: {question}
+### Previous Conversation
+{history}
+
+### User Question
+{question}
 """
-
-prompt = PromptTemplate(input_variables=["context", "question"], template=system_prompt)
-
-qa_chain = ConversationalRetrievalChain.from_llm(
-    llm=llm,
-    retriever=retriever,
-    return_source_documents=False,
-    combine_docs_chain_kwargs={"prompt": prompt},
-    verbose=False
-)
-
 # ===== Small Talk =====
 small_talk_responses = {
     "hi": [
@@ -138,12 +128,28 @@ def handle_small_talk(query: str) -> str:
     return random.choice(small_talk_responses[query.lower().strip()])
 
 def safe_invoke(query: str):
-    # Get last 10 chats from DB
-    history = [(u, b) for u, b, _ in reversed(get_chats(10))]
-    result = qa_chain.invoke({"question": query, "chat_history": history})
-    if not result["answer"].strip():
-        return "I’m here to talk about Anik Chand and his work 🙂"
-    return result["answer"]
+    # Retrieve relevant documents
+    docs = retriever.invoke(query)
+    context = "\n\n".join(doc.page_content for doc in docs)
+
+    # Last 10 chats
+    history = get_chats(10)
+
+    history_text = ""
+    for user, bot, _ in reversed(history):
+        history_text += f"User: {user}\nAssistant: {bot}\n"
+
+    # Fill the prompt
+    prompt = system_prompt.format(
+        context=context,
+        history=history_text,
+        question=query,
+    )
+
+    # Ask Gemini
+    response = llm.invoke(prompt)
+
+    return response.content
 
 def get_bot_response(query: str) -> str:
     if is_small_talk(query):
