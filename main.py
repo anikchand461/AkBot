@@ -48,6 +48,7 @@ async def chat(req: ChatRequest):
     print("Answer:", answer, type(answer))
 
     async with db_lock:
+        print("MAIN:", type(answer), repr(answer))
         await asyncio.to_thread(save_chat, req.query, answer)
 
     return {"answer": answer}

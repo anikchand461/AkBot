@@ -18,13 +18,24 @@ def init_db():
     conn.commit()
     conn.close()
 
-def save_chat(user_message: str, bot_response: str):
+def save_chat(user_message: str, bot_response):
+    print("========== save_chat ==========")
+    print("user_message:", type(user_message), user_message)
+    print("bot_response:", type(bot_response), bot_response)
+    print("===============================")
+
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
+
     cursor.execute("""
         INSERT INTO chats (user_message, bot_response, timestamp)
         VALUES (?, ?, ?)
-    """, (user_message, bot_response, datetime.now().isoformat()))
+    """, (
+        user_message,
+        str(bot_response),      # temporary
+        datetime.now().isoformat()
+    ))
+
     conn.commit()
     conn.close()
 
