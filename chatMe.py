@@ -33,7 +33,11 @@ else:
 retriever = db.as_retriever()
 
 # 5. Gemini Flash model
-llm = init_chat_model("gemini-1.5-flash", model_provider="google_genai")
+llm = init_chat_model(
+    "gemini-3.5-flash-lite",
+    model_provider="google_genai",
+    temperature=0.8,
+)
 
 # 6. Retrieval-Augmented QA chain
 qa_chain = RetrievalQA.from_chain_type(

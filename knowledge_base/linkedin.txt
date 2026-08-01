@@ -75,43 +75,6 @@ Credential ID: 5064657
 
 ⸻
 
-🚀 Projects
-
-💬 AkBot (Aug 2025) - latest project
-	• AI-powered chatbot fine-tuned on personal data (resumes, projects, profiles) with RAG + Gemini API.
-	• Integrated with FastAPI backend, faiss_index storage, and a JS frontend.
-	• Deployed on Render with environment-based secret management.
-	• Tech Stack: FastAPI, LangChain, FAISS index, Gemini API, HTML/CSS/JS, Render
-
-🧠 Sentiment Analysis (Jul 2025)
-	•	Built a stacking ensemble model (Logistic Regression + SGDClassifier + LinearSVC + MultinomialNB).
-	•	Achieved 89.15% accuracy with 5-fold CV.
-	•	Skills: Machine Learning, SVM, Naive Bayes, Gradient Boosting, Stacking, Voting Classifier
-
-🔧 GitCollab (Apr – May 2025)
-	•	Web app for open-source collaboration with GitHub OAuth.
-	•	Tech Stack: Django, Bulma, JS, GitHub OAuth, Render
-	•	Live Demo | Source Code
-
-💰 SalaryAi (May 2025)
-	•	ML-powered salary prediction app.
-	•	Tech: FastAPI backend, HTML/CSS/JS frontend, Polynomial Regression
-
-🧾 BillVault (Apr 2025)
-🏆 2nd Place — TRINITY Hackathon (IETE, HIT)
-	•	Smart bill & warranty tracker with OCR + LLM.
-	•	Tech Stack: Django, JS, SQLite, OCR Space API, Gemini Flash 2.0
-
-🎮 Hangman Game (Jun 2024)
-	•	Python console game with ASCII art & word categories.
-	•	GitHub
-
-🌿 EcoMate
-	•	Platform for eco-friendly habits.
-	•	Tech: Django, Bulma CSS, SQL, JavaScript
-
-⸻
-
 ✍️ Publications (on DEV Community)
 	•	Sentiment Analysis, the Classical Way — No Deep Learning (Aug 2025)
 	•	The Curve That Judges Your ML Model (AUC-ROC Explained) (Jul 2025)

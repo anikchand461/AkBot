@@ -1,0 +1,2119 @@
+# Projects on github .... overall projects of anik 
+for other projects visit github
+
+====================================================
+Repository: chat-with-repo
+====================================================
+name:	anikchand461/chat-with-repo
+description:	Chat with any GitHub repository using an advanced RAG pipeline with multi-query retrieval, reranking, and grounded AI answers.
+--
+<div align="center">
+
+<img src="frontend/assets/logo-chatwithrepo.png" alt="Chat With Repo logo" width="180"/>
+
+# Chat With Repo
+
+### Point it at any GitHub repository. Ask it anything. Get answers grounded in the actual code.
+
+[![Python](https://img.shields.io/badge/python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-backend-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![LangChain](https://img.shields.io/badge/LangChain-RAG-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)](https://www.langchain.com/)
+[![Status](https://img.shields.io/badge/status-active-17b57f?style=for-the-badge)](#)
+
+**[Live Demo](https://chatwithrepo-nine.vercel.app/) · [Problem](#-the-problem) · [RAG Pipeline](#-rag-pipeline) · [Architecture](#-full-architecture) · [Install](#-installation)**
+
+</div>
+
+---
+
+## ◈ The Problem
+
+```
+clone repo  →  open 40 tabs  →  grep for the entry point  →  still lost
+```
+
+READMEs go stale, comments lie, and keyword search finds the word, not the concept. **Chat With Repo** indexes any public GitHub repository into a real retrieval pipeline, so you can ask questions and get answers grounded in the actual files — not a guess.
+
+**Try it now → [chatwithrepo-nine.vercel.app](https://chatwithrepo-nine.vercel.app/)**
+
+---
+
+## ◈ RAG Pipeline
+
+This is the core of the project — a multi-stage retrieval pipeline, not a single embed-and-search step:
+
+<img src="frontend/assets/rag-pipeline.png" alt="Chat With Repo logo"/>
+
+| Stage | Model / Method | Purpose |
+|---|---|---|
+| Query Classification | Groq — `llama-3.1-8b-instant` | Routes the question as `lookup` (file/function/usage) or `analysis` (architecture/design) |
+| Multi-Query Generation | Groq — `llama-3.1-8b-instant` | Rephrases the question into 2 alternate search queries to widen recall |
+| Embedding & Retrieval | Cohere `embed-v4.0` + Chroma | Vector search over chunked repo documents |
+| Fusion | Reciprocal Rank Fusion (RRF) | Merges results from the original + generated queries into one ranked list |
+| Reranking | Cohere `rerank-v3.5` | Re-scores the fused results against the original question for precision |
+| Answer Generation | Gemini `3.1-flash-lite` | Synthesizes the final answer from the top reranked chunks |
+
+Before any of this, ingestion turns a raw repo into searchable documents: **GitHub API → Loader → Converter → Chunker → Embeddings → Vector Store**, plus synthetic repository-level summary documents to improve high-level "explain this codebase" queries.
+
+---
+
+## ◈ Full Architecture
+ 
+<img src="frontend/assets/architecture.png" alt="Chat With Repo logo"/>
+
+Free vs Pro is enforced per-user (monthly repo limit, chat history depth); upgrades run through a Dodo Payments checkout + webhook flow.
+```
+
+**Free vs Pro** is enforced per-user (monthly repo limit, chat history depth); upgrades run through a Dodo Payments checkout + webhook flow.
+
+---
+
+## ◈ Installation
+
+**Step 1 — Clone and install dependencies**
+
+```bash
+git clone https://github.com/anikchand461/chat-with-repo.git
+cd chat-with-repo
+uv sync
+```
+
+**Step 2 — Configure environment variables**
+
+```bash
+cp .env.example .env
+```
+
+```env
+GOOGLE_API_KEY=google_api_key
+COHERE_API_KEY=cohere_api_key
+GROQ_API_KEY=groq_api_key
+DODO_API_KEY=dodopayments_api_key
+DODO_PRODUCT_ID=dodo_product_id
+APP_URL=http://127.0.0.1:5500/
+DODO_BASE_URL=https://test.dodopayments.com
+DATABASE_URL=postgresql+psycopg://neondb_owner:YOUR_PASSWORD@ep-cool-heart-azo2wz85-pooler.c-3.ap-southeast-1.aws.neon.tech/neondb?sslmode=require
+```
+
+**Step 3 — Run the backend**
+
+```bash
+uv run uvicorn backend.app:app --reload
+```
+
+API comes up at `http://127.0.0.1:8000` — docs at `/docs`.
+
+**Step 4 — Open the frontend**
+
+```bash
+cd frontend
+python -m http.server 5500
+```
+
+Visit `http://127.0.0.1:5500/index.html`.
+
+---
+
+## ◈ Tech Stack
+
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-Authentication-000000?style=flat-square&logo=jsonwebtokens&logoColor=white)
+![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat-square&logo=langchain&logoColor=white)
+
+![Groq](https://img.shields.io/badge/Groq-Llama%203.1%208B%20Instant-F55036?style=flat-square)
+![Cohere](https://img.shields.io/badge/Cohere-Embed%20v4%20%7C%20Rerank%20v3.5-39594D?style=flat-square)
+![Gemini](https://img.shields.io/badge/Gemini-Flash--Lite-4285F4?style=flat-square&logo=googlegemini&logoColor=white)
+
+![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector%20Store-8A2BE2?style=flat-square)
+![Neon](https://img.shields.io/badge/Neon-Postgres-00E699?style=flat-square&logo=neondatabase&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
+
+![GitHub](https://img.shields.io/badge/GitHub-API-181717?style=flat-square&logo=github&logoColor=white)
+![Dodo%20Payments](https://img.shields.io/badge/Dodo-Payments-9BE000?style=flat-square)
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+
+![Render](https://img.shields.io/badge/Render-46E3B7?style=flat-square&logo=render&logoColor=black)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
+
+</div>
+
+---
+
+<div align="center">
+
+Built by [anikchand461](https://github.com/anikchand461)
+and [shreyaghorui222004](https://github.com/shreyaghorui222004)
+
+</div>
+
+
+Repository Created : 2026-07-31T08:38:32Z
+First Commit       : 2026-07-21T15:29:01Z
+
+
+====================================================
+Repository: ragbucket
+====================================================
+name:	anikchand461/ragbucket
+description:	Package vectors, chunks, configs, and retrieval memory into portable executable .rag artifacts.
+--
+<div align="center">
+
+<br/>
+
+<img src="frontend/img/ragbucket.png" alt="RagBucket Logo" width="160" />
+
+<br/>
+
+# RagBucket
+
+<h3><em>Portable Executable RAG Artifacts for Python</em></h3>
+
+**Build once. Load anywhere. Query forever.**
+
+<br/>
+
+[![PyPI version](https://img.shields.io/pypi/v/ragbucket?style=for-the-badge&color=FFD700&labelColor=0d0d1a&logo=python&logoColor=FFD700)](https://pypi.org/project/ragbucket/)
+[![Python](https://img.shields.io/pypi/pyversions/ragbucket?style=for-the-badge&color=4FC3F7&labelColor=0d0d1a)](https://pypi.org/project/ragbucket/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-A8FF78?style=for-the-badge&labelColor=0d0d1a)](LICENSE)
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/ragbucket?period=monthly&units=INTERNATIONAL_SYSTEM&left_color=BLUE&right_color=GREEN&left_text=downloads%2Fmonth)](https://pepy.tech/projects/ragbucket)
+<br/>
+[![Website](https://img.shields.io/badge/Website-ragbucket.vercel.app-c084fc?style=for-the-badge&labelColor=0d0d1a&logo=vercel&logoColor=c084fc)](https://ragbucket.vercel.app)
+[![Blog](https://img.shields.io/badge/BLOG-HASHNODE-2962FF?style=for-the-badge&logo=hashnode&logoColor=white)](https://anikchand.hashnode.dev/why-rag-pipelines-aren-t-portable-building-ragbucket)
+
+<br/>
+
+<p>
+  <a href="#-the-problem">Problem</a> ·
+  <a href="#-introducing-rag">The .rag Format</a> ·
+  <a href="#-installation">Install</a> ·
+  <a href="#-quickstart">Quickstart</a> ·
+  <a href="#-multi-provider-runtime">Providers</a> ·
+  <a href="#-roadmap">Roadmap</a>
+</p>
+
+<br/>
+
+</div>
+
+---
+
+## ◈ The Problem
+
+Every major ML format is portable by default:
+
+```
+model.pt   ·   model.onnx   ·   model.gguf   ·   model.h5
+```
+
+You save them, share them, deploy them anywhere.
+
+**RAG systems can't do any of that.**
+
+A typical RAG pipeline is a fragile web of moving parts:
+
+```
+❌  Vector databases tied to specific infrastructure
+❌  Embedding pipelines that must be rebuilt from scratch
+❌  Chunking configs scattered across codebases
+❌  Provider-specific integrations with zero portability
+❌  Metadata that lives nowhere and everywhere at once
+```
+
+Every time you switch environments — laptop to server, dev to prod, team to team — you rebuild the whole thing. **That's broken.**
+
+**RagBucket fixes this.**
+
+It packages your entire RAG pipeline — vectors, chunks, config, and runtime metadata — into a single portable `.rag` artifact. Like a model checkpoint, but for retrieval intelligence.
+
+---
+
+## ◈ Introducing `.rag`
+
+<div align="center">
+<img src="frontend/img/main.png" alt="RagBucket Architecture" width="800" />
+</div>
+
+<br/>
+
+A `.rag` artifact is a **self-contained, executable unit of retrieval intelligence.** It is not a config file. It is not a directory. It is a complete, ready-to-run retrieval system.
+
+| What it stores              | How it stores it             |
+| :-------------------------- | :--------------------------- |
+| Semantic embeddings         | via Sentence Transformers    |
+| Vector index                | via FAISS                    |
+| Chunked knowledge           | via LangChain splitters      |
+| Retrieval configuration     | embedded in manifest         |
+| Runtime metadata            | versioned artifact manifest  |
+
+```
+Build it once.
+Drop it anywhere.
+Query it with one line of code.
+```
+
+---
+
+## ◈ Full Architecture
+
+<div align="center">
+<img src="frontend/img/workflow.png" alt="RagBucket Full Workflow" width="900" />
+</div>
+
+---
+
+## ◈ Installation
+
+```bash
+# Using uv (recommended)
+uv add ragbucket
+
+# Using pip
+pip install ragbucket
+```
+
+> **Lightweight by default.** Local embedding dependencies are only pulled in when you set `embedding_provider="local"`. Cloud providers add nothing to your base install.
+
+---
+
+## ◈ Quickstart
+
+### Step 1 — Build a Portable `.rag` Artifact
+
+```python
+from ragbucket import RagBuilder, RagConfig
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+config = RagConfig(
+
+    # ── Embedding Provider ────────────────────────────────────
+    embedding_provider = "cohere",
+    embedding_model    = "embed-english-v3.0",
+    embedding_api_key  = os.getenv("COHERE_API_KEY"),
+
+    # ── Chunking ──────────────────────────────────────────────
+    chunk_size    = 512,
+    chunk_overlap = 50,
+
+    # ── Retrieval ─────────────────────────────────────────────
+    top_k = 3,
+)
+
+builder = RagBuilder(config=config)
+
+builder.build(
+    doc_path = "docs/",
+    op_path  = "artifacts/demo.rag",
+)
+```
+
+This generates a single portable artifact:
+
+```
+artifacts/
+└── demo.rag          ← your entire RAG pipeline, packaged
+```
+
+---
+
+### Step 2 — Load and Query the Artifact
+
+```python
+from ragbucket import RagRuntime
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+rag = RagRuntime(
+
+    # ── RAG Artifact ──────────────────────────────────────────
+    rag_path = "artifacts/demo.rag",
+
+    # ── Generation Provider ───────────────────────────────────
+    provider = "groq",
+    api_key  = os.getenv("GROQ_API_KEY"),
+    model    = "llama-3.1-8b-instant",
+
+    # ── Embedding Provider Key ────────────────────────────────
+    embedding_api_key = os.getenv("COHERE_API_KEY"),
+
+    # ── System Prompt ─────────────────────────────────────────
+    system_prompt = "You are a helpful assistant. Keep answers short and crisp.",
+)
+
+response = rag.ask("What are Anik's AI/ML skills?")
+print(response)
+```
+
+That's it. No vector DB to spin up. No pipeline to reconstruct. Just load and ask.
+
+---
+
+## ◈ Multi-Provider Runtime
+
+RagBucket cleanly separates **retrieval** from **generation** — meaning you can mix and match embedding providers with generation providers freely.
+
+### Generation Providers
+
+| Provider      | Example Model                 |
+| :------------ | :---------------------------- |
+| `groq`        | `llama-3.1-8b-instant`        |
+| `openai`      | `gpt-4o-mini`                 |
+| `gemini`      | `gemini-1.5-flash`            |
+| `anthropic`   | `claude-3-haiku-20240307`     |
+
+```python
+# Swap providers without touching anything else
+rag = RagRuntime(
+    rag_path  = "demo.rag",
+    provider  = "anthropic",
+    api_key   = os.getenv("ANTHROPIC_API_KEY"),
+    model     = "claude-3-haiku-20240307",
+    embedding_api_key = os.getenv("COHERE_API_KEY"),
+)
+```
+
+### Embedding Providers
+
+| Provider    | Example Model                       |
+| :---------- | :---------------------------------- |
+| `local`     | `BAAI/bge-small-en-v1.5`            |
+| `cohere`    | `embed-english-v3.0`                |
+| `openai`    | `text-embedding-3-small`            |
+| `gemini`    | `models/embedding-001`              |
+| `voyage`    | `voyage-large-2`                    |
+
+```python
+# Use any embedding provider at build time
+config = RagConfig(
+    embedding_provider = "openai",
+    embedding_model    = "text-embedding-3-small",
+    embedding_api_key  = os.getenv("OPENAI_API_KEY"),
+)
+```
+
+---
+
+## ◈ Dynamic Retrieval Configuration
+
+Every stage of the retrieval pipeline is configurable. Sane defaults are always applied automatically.
+
+```python
+from ragbucket import RagConfig
+
+config = RagConfig(
+
+    # Embedding system
+    embedding_provider = "local",
+    embedding_model    = "sentence-transformers/all-MiniLM-L6-v2",
+
+    # Chunking
+    chunk_size    = 1024,
+    chunk_overlap = 100,
+
+    # Retrieval
+    top_k = 5,
+)
+```
+
+> All missing values are filled using framework defaults. Nothing breaks if you leave something out.
+
+---
+
+## ◈ What a `.rag` Artifact Contains
+
+```
+demo.rag
+│
+├── vectors.faiss     ← FAISS vector index (semantic search backbone)
+├── chunks.json       ← document chunks with source metadata
+└── manifest.json     ← embedding config, top_k, model info, version
+```
+
+The artifact is entirely self-describing. Anyone who receives a `.rag` file has everything needed to query it — no external config, no infrastructure dependencies, no guesswork.
+
+---
+
+## ◈ Technology Stack
+
+| Component           | Technology                  |
+| :------------------ | :-------------------------- |
+| Embeddings          | Sentence Transformers       |
+| Vector Search       | FAISS                       |
+| Chunking            | LangChain Text Splitters    |
+| Artifact Packaging  | Python `zipfile`            |
+| Config Validation   | Pydantic                    |
+| Runtime             | Pure Python                 |
+
+---
+
+## ◈ Philosophy
+
+> *RAG systems should be as portable as model files. Not as fragile as microservice stacks.*
+
+RagBucket treats RAG systems as **portable intelligence artifacts** — not fragile infrastructure pipelines. This cleanly separates two concerns that have no business being coupled:
+
+```
+Retrieval memory   →  what you built      →  lives in the .rag file
+Language generation →  how you query it   →  any provider, any environment
+```
+
+Your retrieval knowledge travels with your code. Swap generation providers without rebuilding anything. Share a `.rag` file like you'd share a model checkpoint.
+
+The result: reusable semantic memory that is fully decoupled from infrastructure.
+
+---
+
+## ◈ Links
+
+| Resource   | URL                                                               |
+| :--------- | :---------------------------------------------------------------- |
+| Website    | [ragbucket.vercel.app](https://ragbucket.vercel.app)             |
+| PyPI       | [pypi.org/project/ragbucket](https://pypi.org/project/ragbucket) |
+| GitHub     | [github.com/anikchand461/ragbucket](https://github.com/anikchand461/ragbucket) |
+
+---
+
+## ◈ License
+
+MIT License — see [LICENSE](LICENSE) for details.
+
+---
+
+<div align="center">
+
+<br/>
+
+```
+◈ RagBucket
+```
+
+*The portable runtime layer for Retrieval-Augmented Generation systems.*
+
+Built by [Anik Chand](https://github.com/anikchand461) · [ragbucket.vercel.app](https://ragbucket.vercel.app)
+
+<br/>
+
+</div>
+
+
+Repository Created : 2026-05-19T22:06:05Z
+First Commit       : 2026-05-19T23:32:22Z
+
+
+====================================================
+Repository: cvz
+====================================================
+name:	anikchand461/cvz
+description:	ATS resume checker right in your terminal. 𝗜𝗻𝘀𝘁𝗮𝗹𝗹 𝗼𝗻𝗰𝗲. 𝗨𝘀𝗲 𝗳𝗼𝗿𝗲𝘃𝗲𝗿. 𝗡𝗼 𝗶𝗻𝘁𝗲𝗿𝗻𝗲𝘁. 𝗡𝗼 𝘂𝗽𝗹𝗼𝗮𝗱𝘀. 𝗡𝗼 𝘄𝗮𝗶𝘁𝗶𝗻𝗴.
+--
+<div align="center">
+
+# ⚡ cvz — ATS Resume Analyzer
+
+**Stop guessing. Start scoring.**
+
+A blazing-fast CLI tool that tells you _exactly_ how well your resume matches a job — before a recruiter's ATS does.
+
+[![PyPI version](https://img.shields.io/pypi/v/cvz?color=brightgreen&label=pypi)](https://pypi.org/project/cvz/)
+[![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://pypi.org/project/cvz/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+**[🌐 Live Demo](https://cvz-cli.vercel.app/) · [📦 PyPI](https://pypi.org/project/cvz/) · [🐛 Report Bug](https://github.com/)**
+
+</div>
+
+---
+
+![workflow](./images/workflow.png)
+
+---
+
+## Why cvz?
+
+Most resumes get rejected before a human ever reads them — filtered out by ATS (Applicant Tracking Systems) that scan for keywords and structure. `cvz` puts that power in your hands:
+
+- 🔍 **Keyword matching** — see exactly which role keywords you're hitting (and missing)
+- 🧠 **Semantic similarity** — goes beyond exact matches using NLP
+- 🏗️ **Structure scoring** — checks for the sections recruiters expect
+- 🚀 **Works instantly** — no cloud, no signup, no waiting
+
+---
+
+## Installation
+
+```bash
+pip install cvz
+```
+
+Or build from source:
+
+```bash
+git clone <repo>
+cd cvscan
+pip install -e .
+```
+
+> Requires Python 3.9+
+
+For better semantic scoring, grab the spaCy model:
+
+```bash
+python -m spacy download en_core_web_md
+```
+
+> Without it? No problem — `cvz` gracefully skips semantic scoring and keeps everything else running.
+
+---
+
+## Quick Start
+
+```bash
+# Analyze against a specific role
+cvz analyze resume.pdf --role backend
+
+# Let cvz figure out the best role for you
+cvz analyze resume.pdf
+
+# Analyze against a raw job description
+cvz analyze resume.pdf --jd "python django rest api postgresql"
+```
+
+---
+
+## Commands
+
+### `analyze` — Score your resume
+
+```bash
+cvz analyze resume.pdf --role backend
+cvz analyze resume.pdf --role devops --export report.json
+```
+
+### `suggest-role` — Find your best-fit roles
+
+Not sure which roles to target? cvz will tell you.
+
+```bash
+cvz suggest-role resume.pdf
+cvz suggest-role resume.pdf --top 10
+```
+
+### `gap` — Discover what's missing
+
+See your strengths and the skills you need to add.
+
+```bash
+cvz gap resume.pdf --role machine_learning
+cvz gap resume.pdf --role backend --export gap.json
+```
+
+### `compare` — Rank multiple resume versions
+
+```bash
+cvz compare r1.pdf r2.pdf r3.pdf
+cvz compare r1.pdf r2.pdf --role frontend --export compare.json
+```
+
+### `roles` — Browse supported roles
+
+```bash
+cvz roles
+```
+
+### `--version`
+
+```bash
+cvz --version
+```
+
+---
+
+## How Scoring Works
+
+Each resume is evaluated across three dimensions:
+
+| Metric       | Weight | What it checks                                  |
+| ------------ | ------ | ----------------------------------------------- |
+| 🔑 Keyword   | 50%    | Core (70%) + secondary (30%) role keywords      |
+| 🧠 Semantic  | 30%    | spaCy cosine similarity against role vocabulary |
+| 🏗️ Structure | 20%    | Standard sections present + appropriate length  |
+
+**Score thresholds:**
+
+| Score  | Rating          |
+| ------ | --------------- |
+| ≥ 75%  | ✅ Great match  |
+| 50–74% | 🟡 Decent match |
+| < 50%  | 🔴 Low match    |
+
+---
+
+## Supported Roles
+
+|                    |                     |
+| ------------------ | ------------------- |
+| `backend`          | `frontend`          |
+| `full_stack`       | `software_engineer` |
+| `data_scientist`   | `data_analyst`      |
+| `machine_learning` | `ai_engineer`       |
+| `devops`           | `cloud_engineer`    |
+| `android`          | `ios`               |
+| `cybersecurity`    | `qa_engineer`       |
+| `product_manager`  | `ui_ux_designer`    |
+| `blockchain`       | `embedded_systems`  |
+
+Run `cvz roles` for the full list. Role keyword sets live in `src/cvscan/data/roles.json` — fully extensible.
+
+---
+
+## Supported File Formats
+
+| Format  | Parser                           |
+| ------- | -------------------------------- |
+| `.pdf`  | `pdfplumber`                     |
+| `.docx` | `python-docx` (including tables) |
+| `.txt`  | built-in                         |
+
+---
+
+## Project Structure
+
+```
+cvscan/
+├── src/
+│   └── cvscan/
+│       ├── main.py                 # CLI entry (Typer)
+│       ├── data/
+│       │   └── roles.json          # Role keyword definitions
+│       ├── engines/
+│       │   ├── keyword_engine.py   # Keyword scoring
+│       │   ├── spacy_engine.py     # Semantic similarity
+│       │   └── structure_engine.py # Resume structure
+│       ├── parser/
+│       │   ├── pdf_parser.py       # PDF extraction
+│       │   └── docx_parser.py      # DOCX extraction + tables
+│       └── utils/
+│           ├── loader.py           # File + role loading
+│           ├── cleaner.py          # Text normalisation
+│           └── scorer.py           # Shared scoring logic
+├── pyproject.toml
+└── requirements.txt
+```
+
+---
+
+## Dependencies
+
+```
+typer · rich · pdfplumber · python-docx · spacy · scikit-learn
+```
+
+---
+
+## Author
+
+Built by **Anik Chand**
+
+---
+
+<div align="center">
+
+If `cvz` helped you land an interview, consider leaving a ⭐
+
+</div>
+
+
+Repository Created : 2026-03-25T19:38:41Z
+First Commit       : 2026-03-25T19:38:41Z
+
+
+====================================================
+Repository: lazytune
+====================================================
+name:	anikchand461/lazytune
+description:	A hyperparameter optimization framework
+--
+<div align="center">
+
+<img src="frontend/lazytune.png" width="140"/>
+
+# LazyTune
+
+### *A Hyperparameter Optimization Framework*
+#### for Scikit-Learn Models
+
+<p>
+  <a href="https://pypi.org/project/lazytune/">
+    <img src="https://img.shields.io/pypi/v/lazytune?style=for-the-badge&color=FFD700&labelColor=0d0d1a&logo=python&logoColor=FFD700">
+  </a>
+  <a href="https://pypi.org/project/lazytune/">
+    <img src="https://img.shields.io/pypi/pyversions/lazytune?style=for-the-badge&color=4FC3F7&labelColor=0d0d1a">
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-A8FF78?style=for-the-badge&labelColor=0d0d1a">
+  </a>
+</p>
+
+<p>
+  <a href="https://pepy.tech/projects/lazytune">
+    <img src="https://static.pepy.tech/personalized-badge/lazytune?period=monthly&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=RED&left_text=downloads%2Fmonth" alt="PyPI Downloads">
+  </a>
+  <a href="https://lazytune.vercel.app">
+    <img src="https://img.shields.io/badge/Live_Demo-Visit-c084fc?style=for-the-badge&labelColor=0d0d1a&logo=vercel">
+  </a>
+</p>
+
+</div>
+
+<!-- <div align="center">
+
+# LazyTune 🚀
+
+![LazyTune](frontend/main.png)
+
+**Fast, smart, and lazy hyperparameter optimization**  
+for scikit-learn models —  **faster** than GridSearchCV  
+with almost the same final performance.
+
+![Data Flow](frontend/dataflow.png)
+
+<br>
+
+[![PyPI version](https://badge.fury.io/py/lazytune.svg)](https://pypi.org/project/lazytune/)
+[![Python versions](https://img.shields.io/pypi/pyversions/lazytune.svg)](https://pypi.org/project/lazytune/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+**Live Demo** → [https://lazytune.vercel.app](https://lazytune.vercel.app)  
+**PyPI** → [https://pypi.org/project/lazytune/](https://pypi.org/project/lazytune/)
+
+<br>
+
+</div> -->
+
+## ◈ The Problem
+
+Hyperparameter tuning is one of the most expensive steps in machine learning.
+
+The standard solution is usually:
+
+```python
+GridSearchCV(...)
+```
+
+But Grid Search has a major drawback:
+
+❌ Trains every parameter combination
+
+❌ Wastes time on obviously poor configurations
+
+❌ Scales poorly as search spaces grow
+
+❌ Can take hours for large models
+
+❌ Most configurations never had a chance of winning
+
+For example:
+
+```text
+n_estimators = [50,100,150,200]
+max_depth   = [5,10,15,None]
+min_split   = [2,3,4,5]
+
+4 × 4 × 4 = 64 full trainings
+```
+
+Yet only a handful of those candidates are actually promising.
+
+LazyTune fixes this.
+
+---
+
+## 🔥 Why LazyTune?
+
+- 100% compatible with **any scikit-learn-style estimator**
+- Works for **classification** & **regression**
+- Supports **all scikit-learn metrics** + custom scorers
+- Smart pipeline: **screening → ranking → pruning → full training**
+- Early **pruning** of poor configurations (`prune_ratio`)
+- Parallel execution (`n_jobs`)
+- Clean trial summaries & rankings in pandas DataFrame
+- Returns best model, params, score + detailed report
+
+![LazyTune](frontend/main.png)
+
+<br>
+
+## Installation
+
+```bash
+pip install lazytune
+```
+
+<br>
+
+## Quick Start
+
+```python
+from sklearn.datasets import load_breast_cancer
+from sklearn.ensemble import RandomForestClassifier
+from lazytune import SmartSearch
+
+X, y = load_breast_cancer(return_X_y=True)
+
+param_grid = {
+    "n_estimators": [50, 100, 150, 200],
+    "max_depth": [5, 10, 15, None],
+    "min_samples_split": [2, 3, 4, 5]
+}
+
+search = SmartSearch(
+    estimator=RandomForestClassifier(random_state=42),
+    param_grid=param_grid,
+    metric="accuracy",
+    cv_folds=3,
+    prune_ratio=0.5,       # keep top 50% after screening
+    n_jobs=-1              # use all cores
+)
+
+search.fit(X, y)
+
+print("Best parameters:", search.best_params_)
+print("Best CV score:   ", search.best_score_)
+print("\nBest model:\n", search.best_estimator_)
+```
+
+<br>
+
+## More Examples
+
+### SVM Classification
+
+```python
+from sklearn.svm import SVC
+from lazytune import SmartSearch
+
+search = SmartSearch(
+    estimator=SVC(random_state=42),
+    param_grid={
+        "C": [0.1, 1, 10, 50, 100],
+        "kernel": ["linear", "rbf"],
+        "gamma": ["scale", "auto", 0.001, 0.0001]
+    },
+    metric="f1_macro",
+    cv_folds=5,
+    prune_ratio=0.6
+)
+```
+
+### Regression (Random Forest)
+
+```python
+from sklearn.ensemble import RandomForestRegressor
+from lazytune import SmartSearch
+
+search = SmartSearch(
+    estimator=RandomForestRegressor(random_state=42),
+    param_grid={
+        "n_estimators": [100, 200, 300, 500],
+        "max_depth": [8, 12, 16, None],
+        "min_samples_split": [2, 4, 8]
+    },
+    metric="r2",
+    cv_folds=4,
+    n_jobs=-1
+)
+```
+
+<br>
+
+## Supported Metrics (examples)
+
+### **Classification**
+
+`accuracy` • `f1` • `f1_macro` • `f1_weighted` • `precision` • `recall` • `roc_auc` • `balanced_accuracy` • ...
+
+### **Regression**
+
+`r2` • `neg_mean_squared_error` • `neg_root_mean_squared_error` • `neg_mean_absolute_error` • ...
+
+Custom metrics → use `sklearn.metrics.make_scorer`
+
+<br>
+
+## How LazyTune Works
+
+![Data Flow](frontend/dataflow.png)
+
+1. Generate all (or sampled) hyperparameter combinations
+2. Quick **screening** round with cross-validation
+3. Rank configurations by performance
+4. **Prune** bottom performers (`prune_ratio`)
+5. Train remaining promising candidates thoroughly
+6. Return best model + full trial summary
+
+→ **Much faster** than GridSearchCV / RandomizedSearchCV  
+→ Usually very close (or identical) final performance
+
+<br>
+
+## Main API – `SmartSearch`
+
+### Key Attributes
+
+| Attribute         | Description                                    |
+| ----------------- | ---------------------------------------------- |
+| `best_params_`    | Best hyperparameter dictionary                 |
+| `best_score_`     | Best cross-validated score                     |
+| `best_estimator_` | Fully fitted estimator with best parameters    |
+| `summary_`        | pandas DataFrame with trial results & rankings |
+| `cv_results_`     | Detailed CV results per candidate              |
+
+### Main Methods
+
+- `.fit(X, y)`
+- `.predict(X)`
+- `.score(X, y)`
+- `.get_params()` / `.set_params()`
+
+<br>
+
+## Requirements
+
+- Python ≥ 3.8
+- numpy
+- pandas
+- scikit-learn
+
+<br>
+
+<div align="center">
+
+**Made with ❤️ by [Anik Chand](https://github.com/anikchand461)**  
+MIT License
+
+Feedback, issues, stars, and contributions are **very welcome**! 🌟
+
+[Try Live Demo](https://lazytune.vercel.app) • [Install from PyPI](https://pypi.org/project/lazytune/)
+
+Happy tuning! 🚀
+
+</div>
+
+
+Repository Created : 2026-03-05T08:45:32Z
+First Commit       : 2026-03-05T08:46:18Z
+
+
+====================================================
+Repository: todoc
+====================================================
+name:	anikchand461/todoc
+description:	The most powerful terminal task manager. Fast, beautiful, and built entirely in your shell. Now with Notion integration.
+--
+# ◈ todoc
+
+**The most powerful terminal task manager.**  
+Fast, beautiful, and built entirely in your shell.
+
+```
+╭──────────────────────────────────────────────────────────────╮
+│                     ◈  T O D O C                             │
+│           the most powerful terminal task manager            │
+╰──────────────────────────────────────────────────────────────╯
+
+  #   Priority     St   Task                    Tags
+ ──────────────────────────────────────────────────────────────
+  1  ┃ CRIT ┃  ○  Ship v2.0 release         due:Mon #release
+  2  ┃ HIGH ┃  ○  Fix login bug              #bug #backend
+  3  ┃ MED  ┃  ✓  Write unit tests           #dev
+  4  ┃ LOW  ┃  ○  Update docs                #docs
+
+  1/4  done  ·  3 pending  ·  25%  ████░░░░░░░░░░░░░░░░░░░░░░
+```
+
+[![PyPI version](https://img.shields.io/pypi/v/todoc)](https://pypi.org/project/todoc/)
+[![Python](https://img.shields.io/pypi/pyversions/todoc)](https://pypi.org/project/todoc/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![GitHub](https://img.shields.io/badge/GitHub-anikchand461%2Ftodoc-black?logo=github)](https://github.com/anikchand461/todoc)
+[![Website](https://img.shields.io/badge/Website-todocpy.vercel.app-blue)](https://todocpy.vercel.app)
+
+---
+
+## Installation
+
+```bash
+pip install todoc
+```
+
+Requires Python 3.10+.
+
+### Optional extras
+
+```bash
+pip install todoc[macos]      # rich macOS notifications
+pip install todoc[windows]    # Windows desktop notifications
+pip install todoc[dev]        # pytest + dev tools
+```
+
+> ⚠️ **macOS notification setup:** After `pip install todoc[macos]`:
+>
+> ```bash
+> brew install terminal-notifier
+> ```
+>
+> Then go to **System Settings → Notifications → terminal-notifier** and enable notifications.
+
+---
+
+## Quick Start
+
+```bash
+todoc add "Fix login bug" -p high --tags "#bug #backend"
+todoc list
+todoc done 1
+todoc tui          # interactive dashboard
+todoc help         # full reference
+todoc -s           # compact command summary
+```
+
+---
+
+## All Commands
+
+| Command         | What it does                                   |
+| --------------- | ---------------------------------------------- |
+| `add`           | Create a new task                              |
+| `list`          | Show all tasks (done + pending)                |
+| `done`          | Mark one or more tasks complete                |
+| `undone`        | Reopen a completed task                        |
+| `delete`        | Remove a task permanently                      |
+| `edit`          | Change any field of a task                     |
+| `show`          | Full detail for one task (includes subtasks)   |
+| `search`        | Full-text search — supports `--fuzzy` matching |
+| `sort`          | Display list sorted by a field                 |
+| `stats`         | Beautiful statistics dashboard                 |
+| `clear`         | Remove all completed tasks                     |
+| `reset`         | ⚠️ Wipe ALL tasks permanently                  |
+| `export`        | Save tasks to JSON or CSV                      |
+| `import`        | Load tasks from a JSON backup                  |
+| `subtask`       | Add a subtask under an existing task           |
+| `status`        | Move a task between Kanban columns             |
+| `board`         | Kanban board — To Do / In Progress / Done      |
+| `tui`           | Interactive TUI dashboard (keyboard-driven)    |
+| `notify`        | Send desktop notification for urgent tasks     |
+| `daemon`        | Background auto-notification scheduler         |
+| `push`          | Sync local tasks → Notion                      |
+| `pull`          | Sync Notion tasks → local                      |
+| `notion-logout` | Remove saved Notion credentials                |
+| `help`          | Full command reference                         |
+
+---
+
+## Usage
+
+### Adding tasks
+
+```bash
+todoc add "Buy groceries"
+todoc add "Ship v2" -p critical
+todoc add "Fix auth" -p high --tags "#bug due:fri @alice"
+```
+
+**Priority levels:**
+
+| Level      | Chip              | When to use              |
+| ---------- | ----------------- | ------------------------ |
+| `critical` | `[ CRIT ]` red    | Drop everything          |
+| `high`     | `[ HIGH ]` red    | Needs to be done soon    |
+| `medium`   | `[ MED  ]` yellow | Normal tasks _(default)_ |
+| `low`      | `[ LOW  ]` green  | Someday / nice to have   |
+
+### Listing & filtering
+
+```bash
+todoc list                        # all tasks
+todoc list --pending              # only unfinished
+todoc list --completed            # only finished
+todoc list -p high                # filter by priority
+todoc list --by priority          # sort: critical → low
+todoc list --by priority --desc   # reverse sort
+```
+
+### Completing tasks
+
+```bash
+todoc done 3            # mark #3 done
+todoc done 1 4 7        # bulk-complete three at once
+todoc undone 3          # reopen #3
+```
+
+### Editing tasks
+
+Only passed flags are updated — everything else stays as-is.
+
+```bash
+todoc edit 3 -p critical
+todoc edit 3 --tags "#urgent waiting-for-review"
+todoc edit 3 -d "New description" -p high
+todoc edit 3 --status doing
+todoc edit 3 --tags ""            # clear a field
+```
+
+### Subtasks
+
+```bash
+todoc subtask 1 "Write unit tests" -p medium
+todoc subtask 1 "Update changelog" -p low
+todoc show 1          # shows parent + all subtasks
+```
+
+Deleting a parent also removes all its subtasks.
+
+### Fuzzy Search
+
+```bash
+todoc search "auth"               # exact match
+todoc search "lgin" --fuzzy       # finds "Fix login bug"
+todoc search "shp v2" --fuzzy     # finds "Ship v2.0 release"
+```
+
+### Kanban Board
+
+```bash
+todoc board                  # view all columns
+todoc status 3 doing         # move #3 to In Progress
+todoc status 3 done          # move #3 to Done
+todoc status 3 todo          # move back to To Do
+```
+
+### Interactive TUI
+
+```bash
+todoc tui    # requires: pip install textual
+```
+
+| Key     | Action                        |
+| ------- | ----------------------------- |
+| `a`     | Add a new task                |
+| `e`     | Edit selected task            |
+| `Space` | Toggle done / pending         |
+| `n`     | Cycle status: todo→doing→done |
+| `d`     | Delete selected task          |
+| `/`     | Fuzzy search                  |
+| `r`     | Refresh                       |
+| `q`     | Quit                          |
+
+### Statistics
+
+```bash
+todoc stats    # counts, progress bar, priority & status breakdowns
+```
+
+### Removing tasks
+
+```bash
+todoc delete 5 --force     # delete immediately
+todoc clear                # remove all completed tasks
+todoc reset --force        # ⚠ wipe everything
+```
+
+> **Tip:** Run `todoc export -o backup.json` before `reset`.
+
+### Export & Import
+
+```bash
+todoc export -o backup.json
+todoc export --format csv -o tasks.csv
+todoc import backup.json
+```
+
+---
+
+## Desktop Notifications
+
+Notifications fire automatically at **4h, 6h, 9h, 12h, 18h, 24h** for every pending task — no terminal needed.
+
+```bash
+todoc daemon start     # install & start (run once after install)
+todoc daemon status    # check if running
+todoc daemon stop      # uninstall
+todoc notify           # fire manually right now
+```
+
+| Platform | Mechanism      | Requires                         |
+| -------- | -------------- | -------------------------------- |
+| macOS    | launchd        | `brew install terminal-notifier` |
+| Linux    | systemd / cron | `notify-send` (usually built-in) |
+| Windows  | Task Scheduler | Run as Administrator             |
+
+Logs: `~/.todoc/daemon.log`
+
+---
+
+## Notion Sync
+
+Sync your tasks to a Notion page with `todoc push` and pull them back with `todoc pull`. Credentials are saved once and reused forever.
+
+### Setup (one time)
+
+1. Go to [notion.so/my-integrations](https://www.notion.so/my-integrations) → **New integration** → name it `todoc` → copy the **Internal Integration Token**
+2. Open the Notion page you want to sync to → **"..." menu** → **Connect to** → select `todoc`
+3. Copy the **Page ID** from the URL:
+   ```
+   notion.so/My-Page-abc123def456abc123def456abc12345
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 32 chars
+   ```
+
+### Usage
+
+```bash
+todoc push                 # sync local tasks → Notion
+todoc pull                 # sync Notion tasks → local (backs up first)
+todoc push --reset         # update saved credentials, then push
+todoc notion-logout        # remove saved credentials
+```
+
+> **Note:** `todoc pull` automatically backs up your local tasks to `~/.todoc/tasks_before_pull.json` before overwriting.
+
+Credentials are stored at `~/.todoc/notion_creds.json`.
+
+---
+
+## Help
+
+```bash
+todoc help              # full per-command reference with examples
+todoc -s                # compact one-screen command summary
+todoc <command> --help  # flag list for any single command
+```
+
+---
+
+## Data Storage
+
+```
+~/.todoc/
+├── tasks.json
+├── notion_creds.json       # saved after first todoc push / pull
+├── tasks_before_pull.json  # auto-backup created before todoc pull
+├── daemon.log
+└── daemon-error.log
+```
+
+No accounts required for local use. Notion sync is opt-in.
+
+---
+
+## Project Structure
+
+```
+todoc/
+├── pyproject.toml
+├── README.md
+└── todoc/
+    ├── __init__.py
+    ├── __main__.py
+    ├── exceptions.py
+    ├── cli/
+    │   ├── main.py        # CLI entry point
+    │   ├── formatter.py   # Rich display layer
+    │   ├── tui.py         # Textual TUI dashboard
+    │   ├── board.py       # Kanban board renderer
+    │   └── daemon.py      # background notification daemon
+    ├── core/
+    │   ├── models.py      # Task dataclass
+    │   └── service.py     # business logic + fuzzy search
+    ├── storage/
+    │   └── repository.py  # JSON read/write
+    └── sync/
+        └── notion.py      # Notion API integration (push / pull)
+```
+
+---
+
+## License
+
+MIT — Built with [Typer](https://typer.tiangolo.com/), [Rich](https://github.com/Textualize/rich), and [Textual](https://textual.textualize.io/).
+
+
+Repository Created : 2026-03-14T18:00:19Z
+First Commit       : 2026-03-14T18:00:19Z
+
+
+====================================================
+Repository: zerokey
+====================================================
+name:	anikchand461/zerokey
+description:	Unified API Key Management for Developers
+--
+<div align="center">
+
+# zerokey
+
+**Unified API Key Management for Developers**  
+Securely store, manage, rotate, and call **multiple AI/LLM API keys** (OpenAI, Anthropic, Groq, Gemini, and more) from one place — with zero plaintext leaks and unified interface.
+
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CLI on PyPI](https://img.shields.io/pypi/v/zerokey-cli?label=zerokey-cli&logo=pypi)](https://pypi.org/project/zerokey-cli/) <!-- update when published -->
+
+</div>
+
+## The Problem Developers Face Every Day
+
+Juggling **10–50+ API keys** across providers is painful:
+
+- Scattered `.env` files everywhere → easy to commit by mistake to Git
+- Plaintext keys on disk → security nightmare
+- Different API signatures → constant code changes when switching providers
+- No visibility into usage → surprise bills, no idea which key is burning tokens
+- Hard to rotate or expire keys → manual, error-prone process
+
+**ZeroKey solves all of this** — one secure vault, one unified interface, beautiful CLI + web dashboard, **zero vendor lock-in**.
+
+## Key Features
+
+- **AES-256 client-side encryption** — keys never touch the server in plaintext
+- **Deployment** - Render
+- **Unified proxy** — call any provider with the same format (`/proxy/u/<provider>/<slug>`)
+- **CLI power tool** (`zerokey`): add, list, delete, call, usage — with **Rich** beautiful tables, sparklines & panels
+- **Automatic provider detection** (e.g. `sk-` → OpenAI)
+- **Built-in usage tracking** — tokens used, latency, status codes, errors — per key/provider
+- **Flexible auth** — JWT (username/password) + OAuth (GitHub / GitLab)
+- **Normalized responses** — consistent output across OpenAI, Groq, Anthropic, Gemini ...
+- **CLI for fast development** — install via `pipx install zerokey-cli`, works everywhere (macOS/Linux/Windows)
+
+## Architecture
+
+```
+zerokey/
+├── backend/          # FastAPI server (auth, vault, proxy, usage)
+├── frontend/         # frontend on valinna js , HTML and css
+├── zerokey_cli/      # Typer + Rich CLI (published as zerokey-cli on PyPI)
+├── Dockerfile        # Easy containerization
+└── ... (pyproject.toml, requirements.txt, etc.)
+```
+
+- Database: \*\*NeonDB — PostgreSQL support planned
+- Encryption: **AES-256** at rest (client-side)
+- Auth: **Argon2** password hashing + **JWT** (short-lived)
+- Proxy: Normalizes requests/responses + retries + logging
+
+## Quick Start
+
+### 1. CLI (recommended for daily use)
+
+```bash
+pipx install zerokey-cli    # install the pypy package
+
+zerokey login               # OAuth or username/password
+zerokey add-key             # Add your OpenAI / Groq / etc. key
+zerokey ls                  # Beautiful table of all keys
+zerokey call <unified_key>   # Test call using unified key
+zerokey usage               # Usage overview with sparklines
+```
+
+### 2. Full stack (fastAPI backend + interactive Vanilla JS frontend)
+
+- hosted link : https://zerokey.onrender.com/
+
+Default: backend on `http://localhost:8000`, frontend proxies to it.
+
+## Security Highlights
+
+- Keys encrypted **client-side** before ever hitting the database
+- No plaintext in logs, memory, or disk
+- Short-lived JWTs + secure OAuth flows
+- Strict input validation (Pydantic)
+- Security headers & CORS in FastAPI
+- Designed with **zero-trust** principles
+
+## Who Is This For?
+
+- ML/AI engineers juggling multiple LLM providers
+- Indie hackers & solo devs tired of `.env` chaos
+- Anyone who wants **usage visibility** in a easy way
+- One who wants to store their API keys at a single place
+
+## License
+
+[MIT License](LICENSE) — free to use, modify, distribute.
+
+---
+
+Built with ❤️ by **[Anik Chand](https://github.com/anikchand461)** and **[Abhiraj Adhikary](https://github.com/abhirajadhikary06)**
+**ZeroKey** — because your keys deserve better than a `.env` file.
+
+
+
+Repository Created : 2026-01-13T10:29:36Z
+First Commit       : 2026-01-13T10:29:37Z
+
+
+====================================================
+Repository: task
+====================================================
+name:	anikchand461/task
+description:	A simple, fast, cross-platform command-line todo app written in Go.
+--
+# Task CLI 📝
+
+A simple, fast, cross-platform **command-line todo app** written in Go.
+
+This tool works as a **terminal command** (`task`) and does **NOT require Go** to be installed for normal users.
+
+## Use CLI for task management
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/68ae944d-a0fa-4853-94bf-364b54513c37" width="45%" />
+  <img src="https://github.com/user-attachments/assets/bf36b908-4d7f-4c25-8100-ccfd7b17c629" width="45%" />
+</p>
+
+
+---
+
+## 🚀 Setup & Installation (No Go Required)
+
+Below are step-by-step setup instructions for **each operating system**.
+
+---
+
+## 🟢 macOS Setup
+
+### 1️⃣ Download the binary
+
+Go to the **GitHub Releases** page:
+
+👉 [https://github.com/anikchand461/task/releases](https://github.com/anikchand461/task/releases)
+
+Download the correct file:
+
+* **Apple Silicon (M1 / M2 / M3)** → `task-mac`
+* **Intel Mac** → `task-mac-intel`
+
+---
+
+### 2️⃣ Make the binary executable
+
+Open Terminal and run:
+
+```bash
+cd ~/Downloads
+chmod +x task-mac
+```
+
+(Use `task-mac-intel` if you downloaded the Intel version)
+
+---
+
+### 3️⃣ Move it to PATH (make it a command)
+
+```bash
+sudo mv task-mac /usr/local/bin/task
+```
+
+Now the command `task` is available system-wide.
+
+---
+
+### 4️⃣ macOS security fix (IMPORTANT)
+
+macOS may block the binary because it is not notarized.
+
+If the command is killed immediately, run:
+
+```bash
+sudo xattr -rd com.apple.quarantine /usr/local/bin/task
+```
+
+---
+
+### 5️⃣ Verify installation
+
+```bash
+task
+```
+
+---
+
+## 🟦 Windows Setup
+
+### 1️⃣ Download the binary
+
+From the Releases page, download:
+
+```
+task.exe
+```
+
+---
+
+### 2️⃣ Move to a folder
+
+Example:
+
+```
+C:\task
+```
+
+---
+
+### 3️⃣ Add folder to PATH
+
+1. Search **Environment Variables**
+2. Open **Edit system environment variables**
+3. Click **Environment Variables**
+4. Select **Path** → Edit → New
+5. Add:
+
+   ```
+   C:\task
+   ```
+6. Save and restart terminal
+
+---
+
+### 4️⃣ Verify installation
+
+Open Command Prompt or PowerShell:
+
+```powershell
+task
+```
+
+---
+
+## 🟠 Linux Setup
+
+### 1️⃣ Download the binary
+
+From the Releases page, download:
+
+```
+task-linux
+```
+
+---
+
+### 2️⃣ Make it executable
+
+```bash
+chmod +x task-linux
+```
+
+---
+
+### 3️⃣ Move to PATH
+
+```bash
+sudo mv task-linux /usr/local/bin/task
+```
+
+---
+
+### 4️⃣ Verify installation
+
+```bash
+task
+```
+
+---
+
+## 📌 Usage Guide
+
+### Add a task
+
+```bash
+task add "Buy groceries"
+```
+
+### Edit a task
+```
+task edit 1 "New description"
+```
+
+---
+
+### List all tasks
+
+```bash
+task list
+```
+
+Output example:
+
+```
+1. [ ] Buy groceries
+2. [x] Learn Go
+```
+
+---
+
+### Mark a single task as done
+
+```bash
+task done 1
+```
+
+---
+
+### Edit a task
+```
+task edit 1 "Updated task description"
+```
+
+Update the description of an existing task without changing its completion status.
+
+Example:
+```
+task add "Buy grocerys"
+task edit 1 "Buy groceries"
+```
+
+⚠️ The task number must be valid, and the description cannot be empty.
+
+---
+
+### Mark **all** tasks as done
+
+```bash
+task done all
+```
+
+---
+
+### Clear (delete) all tasks
+
+```bash
+task clear
+```
+
+⚠️ This deletes **all tasks for the current user only**.
+
+---
+
+### Help
+
+```bash
+task help
+task -h
+task --help
+```
+
+Displays all available commands and usage information.
+
+---
+
+## 📂 Data Storage
+
+Tasks are stored **per user** at:
+
+```text
+~/.task/tasks.txt
+```
+
+* Each user has a separate task list
+* Data persists across updates
+* Removing the binary does **not** delete tasks
+* Use `task clear` to remove all stored tasks
+
+---
+
+## 🗑️ Uninstall
+
+### macOS / Linux
+
+Remove the binary:
+
+```bash
+sudo rm /usr/local/bin/task
+```
+
+(Optional) Remove all task data:
+
+```bash
+rm -rf ~/.task
+```
+
+---
+
+### Windows
+
+1. Delete `task.exe` from its folder
+2. (Optional) Remove task data:
+
+```powershell
+rmdir /s %USERPROFILE%\.task
+```
+
+---
+
+## 🛠 Development (For Contributors)
+
+If you want to modify the source code:
+
+```bash
+git clone https://github.com/anikchand461/task.git
+cd task
+go run ./cmd/task list
+```
+
+Build locally:
+
+```bash
+go build -o task ./cmd/task
+```
+
+---
+
+## 🙌 Author
+
+**Anik Chand**
+Built with ❤️ using Go.
+
+
+
+
+# test
+
+
+Repository Created : 2025-12-17T10:29:08Z
+First Commit       : 2025-12-17T10:30:28Z
+
+
+====================================================
+Repository: tmdb-movie-recommender
+====================================================
+name:	anikchand461/tmdb-movie-recommender
+description:	A Streamlit web app that recommends movies using TMDB data. It applies NLP and machine learning to suggest films similar to your favorites.
+--
+# 🎬 TMDB Movie Recommender
+
+A web app built with **Streamlit** that gives movie recommendations using TMDB (The Movie Database) data.  
+Combine data science, NLP, and machine learning to find films you’ll love.
+
+---
+
+## 🧩 Features
+
+- Load and explore TMDB datasets (`tmdb_5000_movies.csv`, `tmdb_5000_credits.csv`)  
+- Preprocess movie titles, cast & crew data with NLP techniques  
+- Compute similarity metrics (e.g. cosine similarity) for recommendations  
+- Provide a simple UI where users input a movie and get similar titles  
+- Interactive and visual outputs via Streamlit  
+
+---
+
+## 🗂 Repo Structure
+
+├── app.py # Streamlit app script / entrypoint
+├── main.ipynb # Notebook for analysis, prototyping, experiments
+├── requirements.txt # Python dependencies
+├── tmdb_5000_movies.csv # Main movie metadata dataset
+├── tmdb_5000_credits.csv # Cast & crew information
+└── README.md # This project documentation
+
+
+
+---
+
+## ⚙️ Installation & Setup
+
+1. **Clone the repo**  
+   ```bash
+   git clone https://github.com/anikchand461/tmdb-movie-recommender.git
+   cd tmdb-movie-recommender
+   ```
+
+2. **(Optional but recommended) Create a virtual environment
+   ```bash
+   python -m venv venv
+   source venv/bin/activate      # macOS / Linux
+   venv\Scripts\activate         # Windows
+   ```
+
+3. ** Install dependencies
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Run the project
+```bash
+streamlit run app.py
+```
+
+
+
+
+Repository Created : 2025-09-22T09:02:40Z
+First Commit       : 2025-09-22T09:02:40Z
+
+
+====================================================
+Repository: AkBot
+====================================================
+name:	anikchand461/AkBot
+description:	Developed a personalized chatbot using RAG + Gemini API, integrated with FastAPI and ChromaDB, and deployed on Render with a JS frontend.
+--
+# 💬 AI Chatbot  
+
+An AI-powered **personalized chatbot** built using **RAG + Gemini API**, integrated with **FastAPI** backend, **ChromaDB** for vector storage, and a responsive **JS frontend**. Deployed seamlessly on **Render**.  
+
+---
+
+## 🚀 Features  
+- 🧠 **Retrieval-Augmented Generation (RAG)** for contextual answers from personal/project data  
+- ⚡ **FastAPI Backend** for handling chatbot requests  
+- 📂 **ChromaDB** as vector database for efficient embeddings & retrieval  
+- 🤖 **Gemini API** integration for LLM responses  
+- 🌐 **Frontend** with HTML/CSS/JS for chat interface  
+- ☁️ **Deployed on Render** with environment-based API key management  
+
+---
+
+## 🛠 Tech Stack  
+- **Backend:** FastAPI, LangChain  
+- **Vector DB:** ChromaDB  
+- **LLM API:** Gemini API  
+- **Frontend:** HTML, CSS, JavaScript  
+- **Deployment:** Render  
+
+---
+
+## ⚙️ Setup & Installation  
+
+1. **Clone the repo**  
+   ```bash
+   git clone https://github.com/anikchand461/AkBot.git
+   cd ai-chatbot
+   ```
+
+2. **Create virtual environment & install dependencies**  
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+3. **Set up environment variables**  
+   Create a `.env` file in the project root:  
+   ```env
+   GEMINI_API_KEY=your_api_key_here
+   ```
+
+4. **Run the backend**  
+   ```bash
+   uvicorn main:app --reload
+   ```
+
+5. **Open the frontend**  
+   Open `index.html` in your browser, or serve via any static hosting.  
+
+---
+
+## 📦 Deployment on Render  
+
+1. Push your repo to GitHub.  
+2. Create a **Render Web Service** → select FastAPI backend.  
+3. Add `GEMINI_API_KEY` under **Environment Variables** in Render Dashboard.  
+4. Deploy 🚀  
+
+---
+
+Repository Created : 2025-08-20T15:38:25Z
+First Commit       : 2025-08-20T15:38:25Z
+
+
+====================================================
+Repository: personality-predictor
+====================================================
+name:	anikchand461/personality-predictor
+description:	A Streamlit web app that predicts whether a person is an introvert or extrovert based on behavioral data using a Random Forest classifier.
+--
+# 🧠 Personality Predictor - Introvert vs Extrovert
+
+A **Streamlit web app** that predicts whether a person is an **introvert or extrovert** based on behavioral traits using a **Random Forest Classifier**.
+
+### 🔗 Live Demo
+
+👉 [Click to Try the App](https://personality-predictorr.streamlit.app)
+
+---
+
+## 📌 Features
+
+* Takes in 4 simple inputs:
+
+  * Social event attendance
+  * Frequency of going outside
+  * Social media post frequency
+  * Friends circle size
+* Predicts personality type: **Introvert 🪫** or **Extrovert 🎉**
+* Built with:
+
+  * Python 🐍
+  * Scikit-learn
+  * Streamlit
+  * Joblib
+
+---
+
+## 🧪 Dataset Info
+
+* Source: [Kaggle Dataset](https://www.kaggle.com/datasets/rakeshkapilavai/extrovert-vs-introvert-behavior-data)
+* 2900 rows × 8 columns
+* Preprocessing steps:
+
+  * Converted categorical variables to binary (Yes/No → 1/0)
+  * Selected features with positive correlation to target
+  * Imputed missing values using `SimpleImputer`
+  * Used Random Forest for classification
+
+---
+
+## ⚙️ How to Run Locally
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/personality-predictor.git
+cd personality-predictor
+```
+
+### 2. Install Requirements
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Run Streamlit App
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## 📁 File Structure
+
+```
+├── app.py                # Main Streamlit app
+├── personality_model.pkl # Trained Random Forest model
+├── requirements.txt      # Python dependencies
+└── README.md             # Project documentation
+```
+
+---
+
+## 📊 Model Performance
+
+* ✅ Accuracy: **90.3%**
+* 📈 R² Score: **0.62**
+* ✔️ Trained using `RandomForestClassifier` from Scikit-learn
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## 🙇‍♂️ Author
+
+Developed by **Anik Chand**
+
+🔗 [LinkedIn](https://linkedin.com/in/anikchand) | [GitHub](https://github.com/your-username)
+
+
+Repository Created : 2025-06-30T15:56:15Z
+First Commit       : 2025-06-30T15:56:16Z
+
+
+====================================================
+Repository: quizly
+====================================================
+name:	anikchand461/quizly
+description:	AI-based quiz generator for instant MCQ practice. Lightweight, mobile-accessible web and APK app.
+--
+Quizly - AI-Powered Quiz Generation Application
+
+Quizly is a state-of-the-art quiz generation application that utilizes the Google Gemini Generative AI API to create sophisticated, context-aware multiple-choice questions based on user-specified topics. Developed with a robust FastAPI backend and a clean, responsive HTML/CSS/JavaScript frontend, Quizly delivers a seamless user experience for learners and educators alike.
+
+Features
+	•	AI-driven generation of dynamic, multiple-choice questions across a wide range of topics
+	•	Provides instant feedback and assessment for questions
+	•	Integrates with the Google Gemini API for advanced, context-rich question generation
+	•	User-friendly, clean, and minimalist interface
+
+Tech Stack
+
+Layer	Technology
+Backend	FastAPI
+Frontend	HTML, CSS, JavaScript
+AI Model	Google Gemini via API
+
+Installation
+	1.	Clone the Repository:
+
+git clone https://github.com/your-username/Quizly.git
+cd Quizly
+
+
+	2.	Install Dependencies:
+
+pip install -r requirements.txt
+
+
+	3.	Setup Environment Variables:
+Create a .env file with your Gemini API key:
+
+GENAI_API_KEY=your_google_gemini_api_key
+
+
+	4.	Run the Application Locally:
+
+uvicorn main:app --reload
+
+
+
+Deployment
+	•	Render: Set the start command as unicorn main:app --reload.
+	•	Railway: Configure the app and obtain the deployment URL from the Railway dashboard.
+
+Usage
+	1.	Open the app in a browser.
+	2.	Enter desired topics (comma-separated).
+	3.	Choose the number of questions.
+	4.	Click “Generate Quiz” to begin.
+
+Contributing
+
+We welcome contributions. To propose changes or enhancements, open an issue for discussion first. All PRs must adhere to project coding and documentation standards.
+
+License
+
+Distributed under the MIT License.
+
+Repository Created : 2025-05-24T15:38:21Z
+First Commit       : 2025-05-24T15:31:54Z
+
+
+====================================================
+Repository: billvault
+====================================================
+
+Repository Created : {"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
+First Commit       : {"message":"Not Found","documentation_url":"https://docs.github.com/rest/commits/commits#list-commits","status":"404"}
+
+

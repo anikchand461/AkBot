@@ -3,7 +3,7 @@ import os
 import random
 from dotenv import load_dotenv
 from langchain_community.document_loaders import TextLoader
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain.chat_models import init_chat_model
 from langchain.chains import ConversationalRetrievalChain
@@ -14,7 +14,9 @@ from db import get_chats
 load_dotenv()
 
 # ===== Load / Build FAISS Index =====
-embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+embeddings = HuggingFaceEmbeddings(
+    model_name="BAAI/bge-small-en-v1.5"
+)
 knowledge_dir = "knowledge_base"
 faiss_index_path = "./faiss_index"
 
@@ -35,13 +37,18 @@ else:
 retriever = db.as_retriever()
 
 # ===== Gemini Flash =====
-llm = init_chat_model("gemini-2.5-flash", model_provider="google_genai", temperature=0.8)
+llm = init_chat_model(
+    "gemini-3.5-flash-lite",
+    model_provider="google_genai",
+    temperature=0.8
+)
 
 system_prompt = """
 You are AkBot 🤖, a friendly AI assistant built by Anik Chand.
 
 ### Core Purpose
 - Prioritize talking about Anik Chand.
+- Prioritize the github projects if the user ask about the projects.
 - If a question is outside scope, you may politely redirect back to Anik Chand, but you’re also allowed to handle **simple general queries** (like small talk, greetings, or basic math).  
 - If the query is completely unrelated and too broad (e.g., politics, world news, sports), gently say:  
   "I’m mainly here to share about Anik Chand 🙂. Would you like to hear about his projects, skills, or experiences?"

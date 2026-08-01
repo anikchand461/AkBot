@@ -1,0 +1,75 @@
+# EXPERIENCE_LOG
+
+## contributor
+**@ Girl Script Summer of Code**
+
+--- 
+
+
+## CONTRIBUTOR
+
+**@ Nexus Spring of Code**
+**Duration:** Apr 2026 – Jun 2026
+
+* Built a GitHub API rate-limit status indicator with remaining requests, reset time, color-coded usage status, and low-limit warnings.
+* Rewrote the project documentation from scratch, including setup, configuration, project structure, dependencies, and contribution guidelines.
+
+---
+
+## PROJECT ADMIN
+
+**@ Apertre 3.0**
+**Duration:** Feb 2026 – Mar 2026
+
+* Project Admin for the project **"task"** – [https://github.com/anikchand461/task](https://github.com/anikchand461/task)
+* It is a CLI project written in Go for task management using terminal.
+
+---
+
+## CONTRIBUTOR – NUMPY
+
+**@ NumPy**
+**Duration:** Oct 2025
+
+* Finalized deprecations in `linalg/fft` modules (PR #29909) to enhance type safety for ML workflows.
+* Improved library stability for scientific computing and generative models (e.g., GANs) through robust SVD/FFT implementations.
+
+---
+
+## CONTRIBUTOR – HACKTOBERFEST
+
+**@ LocalStack**
+**Duration:** Oct 2025
+
+* Normalized documentation structure for the **"Reproducible ML with Cloud Pods"** tutorial by adding Introduction and Testing sections (PR #268).
+* Enhanced developer onboarding by improving clarity and consistency in AWS emulation guides.
+
+---
+
+## MACHINE LEARNING TRAINEE
+
+**@ ISTE HIT Student Chapter**
+**Duration:** Mar – Sep 2025
+
+* Executed ML pipelines for student projects, boosting model accuracy and applying skills to real-world cases.
+* Mentored at **BitsNBytes 2025 (ISTE)**, guiding participants through technical challenges and advanced DSA problem-solving.
+
+---
+
+## MENTOR
+
+**@ GirlScript Summer of Code**
+**Duration:** Jul – Sep 2025
+
+* Mentored contributors in Python and ML projects, providing expert code reviews and advanced debugging guidance.
+* Led interactive sessions to instill best coding practices, enhance collaboration, and foster high-performing teamwork.
+
+---
+
+## WINNER – CODATHON
+
+**@ ICNSBT at Haldia**
+**Duration:** Feb 2025
+
+* Secured **1st place** for innovative algorithmic solutions.
+* Delivered optimized solutions under time constraints.
