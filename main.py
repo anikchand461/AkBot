@@ -41,11 +41,15 @@ async def home(request: Request):
 
 @app.post("/chat")
 async def chat(req: ChatRequest):
-    # Run the bot response in a separate thread if it's blocking
-    answer = await asyncio.to_thread(get_bot_response, req.query)
+    try:
+        answer = await asyncio.to_thread(get_bot_response, req.query)
 
-    # Ensure DB writes don’t collide
-    async with db_lock:
-        await asyncio.to_thread(save_chat, req.query, answer)
+        async with db_lock:
+            await asyncio.to_thread(save_chat, req.query, answer)
 
-    return {"answer": answer}
+        return {"answer": answer}
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return {"answer": f"ERROR: {e}"}

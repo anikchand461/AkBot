@@ -1,19 +1,20 @@
 # chatbot_core.py
-import os
+
 import random
-from dotenv import load_dotenv
 from langchain_community.document_loaders import TextLoader
-from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain.chat_models import init_chat_model
 from db import get_chats
 
-# Load environment variables
+from dotenv import load_dotenv
+from langchain_cohere import CohereEmbeddings
+import os
+
 load_dotenv()
 
-# ===== Load / Build FAISS Index =====
-embeddings = HuggingFaceEmbeddings(
-    model_name="BAAI/bge-small-en-v1.5"
+embeddings = CohereEmbeddings(
+    model="embed-english-v3.0",
+    cohere_api_key=os.getenv("COHERE_API_KEY")
 )
 knowledge_dir = "knowledge_base"
 faiss_index_path = "./faiss_index"
@@ -128,28 +129,31 @@ def handle_small_talk(query: str) -> str:
     return random.choice(small_talk_responses[query.lower().strip()])
 
 def safe_invoke(query: str):
-    # Retrieve relevant documents
-    docs = retriever.invoke(query)
-    context = "\n\n".join(doc.page_content for doc in docs)
+    try:
+        docs = retriever.invoke(query)
 
-    # Last 10 chats
-    history = get_chats(10)
+        context = "\n\n".join(doc.page_content for doc in docs)
 
-    history_text = ""
-    for user, bot, _ in reversed(history):
-        history_text += f"User: {user}\nAssistant: {bot}\n"
+        history = get_chats(10)
 
-    # Fill the prompt
-    prompt = system_prompt.format(
-        context=context,
-        history=history_text,
-        question=query,
-    )
+        history_text = ""
+        for user, bot, _ in reversed(history):
+            history_text += f"User: {user}\nAssistant: {bot}\n"
 
-    # Ask Gemini
-    response = llm.invoke(prompt)
+        prompt = system_prompt.format(
+            context=context,
+            history=history_text,
+            question=query,
+        )
 
-    return response.content
+        response = llm.invoke(prompt)
+
+        return response.content
+
+    except Exception:
+        import traceback
+        traceback.print_exc()
+        raise
 
 def get_bot_response(query: str) -> str:
     if is_small_talk(query):
