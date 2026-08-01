@@ -148,6 +148,9 @@ def safe_invoke(query: str):
 
         response = llm.invoke(prompt)
 
+        print(type(response.content))
+        print(response.content)
+        
         return response.content
 
     except Exception:

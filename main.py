@@ -13,6 +13,7 @@ from chat import get_bot_response
 init_db()
 
 app = FastAPI()
+print("NEW BUILD WORKING")
 templates = Jinja2Templates(directory="templates")
 
 # ===== CORS =====
@@ -41,15 +42,12 @@ async def home(request: Request):
 
 @app.post("/chat")
 async def chat(req: ChatRequest):
-    try:
-        answer = await asyncio.to_thread(get_bot_response, req.query)
+    answer = await asyncio.to_thread(get_bot_response, req.query)
 
-        async with db_lock:
-            await asyncio.to_thread(save_chat, req.query, answer)
+    print("Query:", req.query, type(req.query))
+    print("Answer:", answer, type(answer))
 
-        return {"answer": answer}
+    async with db_lock:
+        await asyncio.to_thread(save_chat, req.query, answer)
 
-    except Exception as e:
-        import traceback
-        traceback.print_exc()
-        return {"answer": f"ERROR: {e}"}
+    return {"answer": answer}
