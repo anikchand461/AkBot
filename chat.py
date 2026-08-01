@@ -147,9 +147,13 @@ def safe_invoke(query: str):
         )
 
         response = llm.invoke(prompt)
-
-        print(type(response.content))
-        print(response.content)
+        
+        if isinstance(response.content, list):
+            return "".join(
+                block["text"]
+                for block in response.content
+                if block["type"] == "text"
+            )
         
         return response.content
 
